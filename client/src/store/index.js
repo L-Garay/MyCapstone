@@ -72,13 +72,12 @@ export default new Vuex.Store({
       }
     },
     //#endregion
-    //#region -- AUTH STUFF --
+    //#region -- Profile STUFF --
 
     async RegisterProfile({ commit, dispatch }, profile) {
       try {
         let user = await api.post("profile", profile);
         commit("setProfile", user);
-        router.push({ name: "home" });
       } catch (e) {
         console.warn(e.message);
       }
