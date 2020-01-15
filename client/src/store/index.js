@@ -84,6 +84,15 @@ export default new Vuex.Store({
       } catch (e) {
         console.warn(e.message);
       }
+    },
+    async getProfileByUserId({commit, dispatch}){
+      try {
+        let pro = await api.get("profile/" + this.state.user._id).then(res =>{          
+          commit("setProfile", res.data)
+        })
+      } catch (error) {
+        console.warn(error.message)
+      }
     }
 
     //#endregion

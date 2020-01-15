@@ -21,7 +21,7 @@ export default class ProfileController {
 
   async getByUserId(req, res, next) {
     try {
-      let data = await _profileService.getByUserId(req.params.userId);
+      let data = await _profileService.getByUserId(req.params.id);
       return res.send(data);
     } catch (error) {
       next(error);

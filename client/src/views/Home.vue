@@ -39,6 +39,14 @@ export default {
   name: "home",
   components: {
     Navbar
+  },
+  mounted(){
+    this.$store.dispatch("getProfileByUserId")
+  },
+  computed:{
+    profile(){
+      return this.$store.state.profile
+    }
   }
 };
 </script>
