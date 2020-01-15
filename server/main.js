@@ -33,18 +33,18 @@ server.use(bp.json());
 //NOTE Everything above this line always stays the same
 
 //NOTE REGISTER YOUR SESSION, OTHERWISE YOU WILL NEVER GET LOGGED IN
-import UserController from "./controllers/UserController";
 import Session from "./middleware/session";
 server.use(new Session().express);
-server.use("/account", new UserController().router);
 
 //NOTE next we want to register all our routes(doorways that can be accessed in our app)
 
 //NOTE we have to import access to our controllers
-import ValuesController from "./controllers/ValuesController";
+import UserController from "./controllers/UserController";
+import ProfileController from "./controllers/ProfileController";
 
 //NOTE remember the forward slash at the start of your path!
-server.use("/api/values", new ValuesController().router);
+server.use("/account", new UserController().router);
+server.use("/profile", new ProfileController().router);
 
 //NOTE Everything below this line always stays the same
 
