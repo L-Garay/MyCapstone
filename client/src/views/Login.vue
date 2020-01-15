@@ -2,7 +2,7 @@
   <div class="login container-fluid">
     <div class="row">
       <div class="col-12">
-        <h1>Welcome to the Bar Hop</h1>
+        <img src="../assets/BarHopLogo.png" alt="">
       </div>
     </div>
     <div class="row">
@@ -34,6 +34,13 @@
           <p v-if="loginForm">No account? Click here to Register</p>
           <p v-else>Already have an account? Click here to Login</p>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h1>About BarHop</h1>
+        <p>this is where we can describe everything about wtf our application is</p>
+        <p>and this is where we can put an optional demo video</p>
       </div>
     </div>
   </div>

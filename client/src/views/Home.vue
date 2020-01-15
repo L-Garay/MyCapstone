@@ -4,12 +4,31 @@
       <navbar />
     </div>
     <div class="row">
-      <div class="col-4">
-        <h1>Home Page</h1>
+      <div class="col">
+        <p>this is the spot for the image carousel </p>
       </div>
     </div>
     <div class="row">
-      <div class="col-12">Content goes here</div>
+      <div class="col-4">
+        <h1>Past</h1>
+        <ol>
+          <li>outing title</li>
+        </ol>
+      </div>
+      <div class="col-4">
+        <h1>Active</h1>
+        <ol>
+          <li>outing title</li>
+        </ol>
+        <img id="status-picture" src="https://www.pinclipart.com/picdir/middle/211-2118971_happy-face-chalk-png-hope-you-enjoy-my.png" alt="">
+        <button class="btn btn-dark">Create</button>
+      </div>
+      <div class="col-4">
+        <h1>Upcoming</h1>
+        <ol>
+          <li>outing title</li>
+        </ol>
+      </div>
     </div>
   </div>
 </template>
@@ -23,3 +42,9 @@ export default {
   }
 };
 </script>
+<style>
+#status-picture{
+  height: 7em;
+  border-radius: 50%
+}
+</style>
