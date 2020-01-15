@@ -2,7 +2,7 @@
   <div class="login container-fluid">
     <div class="row">
       <div class="col-12">
-        <img src="../assets/BarHopLogo.png" alt="">
+        <img src="../assets/BarHopLogo.png" alt />
       </div>
     </div>
     <div class="row">
@@ -18,7 +18,7 @@
           <button class="btn login-btn" type="submit">Login</button>
         </form>
         <form class="d-flex flex-column flex-sm-row" v-else @submit.prevent="register">
-          <input class="login-input" type="text" v-model="newUser.name" placeholder="NAME" />
+          <input class="login-input" type="text" v-model="newProfile.name" placeholder="NAME" />
           <input class="login-input" type="email" v-model="newUser.email" placeholder="EMAIL" />
           <input
             class="login-input"
@@ -98,8 +98,8 @@ export default {
     }
   },
   methods: {
-    register() {
-      this.$store.dispatch("registerUser", this.newUser);
+    async register() {
+      await this.$store.dispatch("registerUser", this.newUser);
       this.$store.dispatch("RegisterProfile", this.newProfile);
     },
     loginUser() {
