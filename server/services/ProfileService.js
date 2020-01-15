@@ -5,16 +5,12 @@ import ApiError from "../utils/ApiError";
 const _repository = mongoose.model("Profile", Profile);
 
 class ProfileService {
-  async getByUserId(userId, authId) {
-    if (userId !== authId) {
-      throw new ApiError("This isn't your profile", 400);
-    } else {
-      let data = await _repository.findOne({ userId: userId });
-      if (!data) {
-        throw new ApiError("Invalid User Id", 400);
-      }
-      return data;
+  async getByUserId(userId) {
+    let data = await _repository.findOne({ userId: userId });
+    if (!data) {
+      throw new ApiError("Invalid User Id", 400);
     }
+    return data;
   }
 
   async create(rawData) {

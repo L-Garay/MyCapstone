@@ -15,18 +15,13 @@ export default class ProfileController {
       .use(this.defaultRoute);
   }
 
-  // this is pretty neat
-
   defaultRoute(req, res, next) {
     next({ status: 404, message: "No Such Route" });
   }
 
   async getByUserId(req, res, next) {
     try {
-      let data = await _profileService.getByUserId(
-        req.params.userId,
-        req.session.uid
-      );
+      let data = await _profileService.getByUserId(req.params.userId);
       return res.send(data);
     } catch (error) {
       next(error);
