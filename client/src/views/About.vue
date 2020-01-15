@@ -1,5 +1,16 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="about container-fluid">
+    <navbar/>
   </div>
 </template>
+<script>
+import Navbar from "@/components/NavBar.vue";
+export default {
+  components: {
+    Navbar
+  }
+};
+</script>
+<style>
+
+</style>
