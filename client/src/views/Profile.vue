@@ -11,11 +11,11 @@
     <h2 style="color:white">Invites(  )</h2>
   </div>
   <div class="col-6">
-    <h2 style="color:white">Name:</h2>
-    <h2 style="color:white">Age:</h2>
-    <h2 style="color:white">Address:</h2>
-    <h2 style="color:white">Phone:</h2>
-    <h2 style="color:white">Take Me Home:</h2>
+    <h2 style="color:white">Name:{{profile.name}}</h2>
+    <h2 style="color:white">Age:{{profile.age}}</h2>
+    <h2 style="color:white">Address:{{profile.address}}</h2>
+    <h2 style="color:white">Phone:{{profile.phone}}</h2>
+    <h2 style="color:white">Take Me Home:{{profile.tmh}}</h2>
   </div>
 </div>
 <div class="row">
@@ -34,6 +34,11 @@ import Navbar from "@/components/NavBar.vue";
 export default {
   components: {
     Navbar
+  },
+  computed: {
+    profile(){
+      return this.$store.state.profile
+    }
   }
 };
 </script>

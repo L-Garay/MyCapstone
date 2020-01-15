@@ -76,8 +76,11 @@ export default new Vuex.Store({
 
     async RegisterProfile({ commit, dispatch }, profile) {
       try {
+        console.log("profile being sent to server", profile)
+        debugger
         let user = await api.post("profile", profile);
-        commit("setProfile", user);
+        console.log("this is whats being sent to the store", user.data);
+        commit("setProfile", user.data);
       } catch (e) {
         console.warn(e.message);
       }
