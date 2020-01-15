@@ -32,7 +32,7 @@ export default new Vuex.Store({
       try {
         let user = await UserService.Register(creds);
         commit("setUser", user);
-        router.push({ name: "boards" });
+        router.push({ name: "home" });
       } catch (e) {
         console.warn(e.message);
       }
@@ -41,7 +41,7 @@ export default new Vuex.Store({
       try {
         let user = await UserService.Login(creds);
         commit("setUser", user);
-        router.push({ name: "boards" });
+        router.push({ name: "home" });
       } catch (e) {
         console.warn(e.message);
       }
