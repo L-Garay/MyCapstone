@@ -41,10 +41,12 @@ server.use(new Session().express);
 //NOTE we have to import access to our controllers
 import UserController from "./controllers/UserController";
 import ProfileController from "./controllers/ProfileController";
+import OutingController from "./controllers/OutingsController";
 
 //NOTE remember the forward slash at the start of your path!
 server.use("/account", new UserController().router);
 server.use("/api/profile", new ProfileController().router);
+server.use("/api/outing", new OutingController().router);
 
 //NOTE Everything below this line always stays the same
 

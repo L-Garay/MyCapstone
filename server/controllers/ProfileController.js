@@ -21,7 +21,7 @@ export default class ProfileController {
 
   async getByUserId(req, res, next) {
     try {
-      let data = await _profileService.getByUserId(req.params.userId);
+      let data = await _profileService.getByUserId(req.params.id);
       return res.send(data);
     } catch (error) {
       next(error);
@@ -43,7 +43,7 @@ export default class ProfileController {
   async edit(req, res, next) {
     try {
       let data = await _profileService.edit(
-        req.params.userId,
+        req.params.id,
         req.session.uid,
         req.body
       );
@@ -55,7 +55,7 @@ export default class ProfileController {
 
   async delete(req, res, next) {
     try {
-      await _profileService.delete(req.params.userId, req.session.uid);
+      await _profileService.delete(req.params.id, req.session.uid);
       return res.send("Successfully deleted");
     } catch (error) {
       next(error);

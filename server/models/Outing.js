@@ -4,11 +4,11 @@ let ObjectId = Schema.Types.ObjectId;
 
 const Outing = new Schema(
   {
-    authorId: { type: ObjectId, ref: "User", required: true, unique: true },
-    title: { type: String, required: true },
-    date: { type: Date },
-    startingPoint: { type: String, required: true },
-    attendies: { type: Array }
+    authorId: { type: ObjectId, ref: "User", required: true },
+    name: { type: String, required: true },
+    date: { type: Date, required: true },
+    startingPoint: { type: String },
+    bars: { type: Array }
   },
   { timestamps: true, toJSON: { virtuals: true } }
 );
