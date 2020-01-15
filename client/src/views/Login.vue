@@ -93,7 +93,7 @@ export default {
   methods: {
     register() {
       this.$store.dispatch("registerUser", this.newUser);
-      this.$store.dispatch("registerProfile", this.newProfile);
+      this.$store.dispatch("RegisterProfile", this.newProfile);
     },
     loginUser() {
       this.$store.dispatch("login", this.creds);

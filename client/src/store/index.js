@@ -74,7 +74,7 @@ export default new Vuex.Store({
     //#endregion
     //#region -- AUTH STUFF --
 
-    async RegisterUserProfile({ commit, dispatch }, profile) {
+    async RegisterProfile({ commit, dispatch }, profile) {
       try {
         let user = await api.post("profile", profile);
         commit("setProfile", user);
