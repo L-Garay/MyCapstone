@@ -26,7 +26,26 @@
             v-model="newUser.password"
             placeholder="PASSWORD"
           />
-          <button class="btn register-btn" type="submit">Create Account</button>
+          <input class="login-input" type="number" v-model="newProfile.age" placeholder="AGE" />
+          <input
+            class="login-input"
+            type="text"
+            v-model="newProfile.phone"
+            placeholder="PHONE NUMBER"
+          />
+          <input
+            class="login-input"
+            type="address"
+            v-model="newProfile.address"
+            placeholder="ADDRESS"
+          />
+          <input
+            class="login-input"
+            type="text"
+            v-model="newProfile.tmh"
+            placeholder="This will link to rideshares"
+          />
+          <button @submit="register" class="btn register-btn" type="submit">Create Account</button>
         </form>
       </div>
       <div class="col-6 offset-3 pt-2">
@@ -53,8 +72,16 @@ export default {
       },
       newUser: {
         email: "",
-        password: "",
-        name: ""
+        password: ""
+      },
+      newProfile: {
+        name: "",
+        age: "",
+        phone: "",
+        picture: "",
+        status: 0,
+        address: "",
+        tmh: ""
       }
     };
   },
@@ -65,7 +92,8 @@ export default {
   },
   methods: {
     register() {
-      this.$store.dispatch("register", this.newUser);
+      this.$store.dispatch("registerUser", this.newUser);
+      this.$store.dispatch("registerProfile", this.newProfile);
     },
     loginUser() {
       this.$store.dispatch("login", this.creds);
