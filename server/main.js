@@ -44,7 +44,7 @@ import ProfileController from "./controllers/ProfileController";
 
 //NOTE remember the forward slash at the start of your path!
 server.use("/account", new UserController().router);
-server.use("/profile", new ProfileController().router);
+server.use("/api/profile", new ProfileController().router);
 
 //NOTE Everything below this line always stays the same
 
