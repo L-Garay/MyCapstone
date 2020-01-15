@@ -1,6 +1,8 @@
 <template>
   <div id="app">
     <div id="nav" v-show="login">
+      <!-- Logo-dropdown menue and profile picture-dropdown menu -->
+      <button @click.prevent="logout" class="btn" type="button">Logout</button>
       <router-link to="/">Home</router-link>|
       <router-link to="/about">About</router-link>
     </div>
@@ -20,6 +22,19 @@ export default {
       this.login = false;
     } else if (this.$route.name !== "login") {
       this.login = true;
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("logout");
+      this.hideNavBar();
+    },
+    hideNavBar() {
+      if (this.$route.name == "login") {
+        this.login = false;
+      } else if (this.$route.name !== "login") {
+        this.login = true;
+      }
     }
   }
 };

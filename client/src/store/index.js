@@ -21,6 +21,9 @@ export default new Vuex.Store({
   mutations: {
     setUser(state, user) {
       state.user = user;
+    },
+    resetState(state) {
+      state.user = {};
     }
   },
   actions: {
