@@ -61,6 +61,8 @@ export default new Vuex.Store({
     async login({ commit, dispatch }, creds) {
       try {
         let user = await UserService.Login(creds);
+        console.log(user);
+        
         commit("setUser", user);
         router.push({ name: "home" });
       } catch (e) {
@@ -103,7 +105,7 @@ export default new Vuex.Store({
     },
     async createOuting({ commit, dispatch }, outingData) {
       try {
-        let res = await api.post("outings", outingData);
+        let res = await api.post("outing", outingData);
         dispatch("getOutings", outingData);
       } catch (error) {
         console.warn(error.message);

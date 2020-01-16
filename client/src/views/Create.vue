@@ -6,8 +6,8 @@
   <div class="row"> 
     <form @submit.prevent="createOuting">
     <div class="col-6">
-      <label for="title">Title:</label>
-      <input v-model="newOuting.title" id="title" type="text">
+      <label for="name">Title:</label>
+      <input v-model="newOuting.name" id="name" type="text">
     </div>
     <div class="col-6">
       <label for="datetime-local">When:</label>
@@ -37,7 +37,7 @@ export default {
   data(){
     return {
       newOuting: {
-        title: "",
+        name: "",
         date: ""
       }
     }
@@ -45,8 +45,10 @@ export default {
   components: {
     Navbar
   },
-  method:{
+  methods:{
      async createOuting(){
+       console.log(this.newOuting);
+       
        this.$store.dispatch("createOuting", this.newOuting);
        this.newOuting = {title: "", date: ""}
     }
