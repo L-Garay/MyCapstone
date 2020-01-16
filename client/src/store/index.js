@@ -94,8 +94,8 @@ export default new Vuex.Store({
     },
     async getProfileByUserId({ commit, dispatch }) {
       try {
-        let pro = await api.get("profile/" + this.state.user._id).then(res => {
-          commit("setProfile", pro.data);
+        await api.get("profile/" + this.state.user._id).then(res => {
+          commit("setProfile", res.data);
         });
       } catch (error) {
         console.warn(error.message);
