@@ -20,6 +20,11 @@ const routes = [
     component: Login
   },
   {
+    path: "/login",
+    name: "login",
+    component: Login
+  },
+  {
     path: "/profile/:id",
     name: "profile",
     component: Profile
@@ -33,6 +38,11 @@ const routes = [
     path: "/about",
     name: "about",
     component: About
+  },
+  {
+    path: "/",
+    name: "login",
+    component: Login
   }
 ];
 
