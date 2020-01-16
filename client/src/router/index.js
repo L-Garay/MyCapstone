@@ -10,6 +10,11 @@ Vue.use(VueRouter);
 
 const routes = [
   {
+    path: "/",
+    name: "home",
+    component: Home
+  },
+  {
     path: "/home/:id",
     name: "home",
     component: Home
@@ -19,11 +24,7 @@ const routes = [
     name: "login",
     component: Login
   },
-  {
-    path: "/login",
-    name: "login",
-    component: Login
-  },
+
   {
     path: "/profile/:id",
     name: "profile",
@@ -40,9 +41,8 @@ const routes = [
     component: About
   },
   {
-    path: "/",
-    name: "login",
-    component: Login
+    path: "*",
+    redirect: "/"
   }
 ];
 
