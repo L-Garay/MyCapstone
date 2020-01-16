@@ -53,7 +53,7 @@ export default new Vuex.Store({
       try {
         let user = await UserService.Register(creds);
         commit("setUser", user);
-        router.push({ name: "home" });
+        router.push({ path: `home/${this.state.user._id}` });
       } catch (e) {
         console.warn(e.message);
       }
@@ -63,7 +63,7 @@ export default new Vuex.Store({
         let user = await UserService.Login(creds);
         console.log(user);
         commit("setUser", user);
-        router.push({ name: "home" });
+        router.push({ path: `home/${this.state.user._id}` });
       } catch (e) {
         console.warn(e.message);
       }
@@ -102,25 +102,24 @@ export default new Vuex.Store({
         console.warn(error.message);
       }
     },
-    
+
     //#endregion
     //#region -- Outing STUFF --
-        async getAllOutings({ commit, dispatch }) {
-            let res = await api.get("outing");
-            console.log("these are all of the outings", res.data);
-            
-            commit("setOutings", res.data)
-        },
-        async createOuting({ commit, dispatch }, outingData) {
-          try {
-            let res = await api.post("outing", outingData);
-            dispatch("getOutings", outingData);
-          } catch (error) {
-            console.warn(error.message);
-          }
-        }
+    async getAllOutings({ commit, dispatch }) {
+      let res = await api.get("outing");
+      console.log("these are all of the outings", res.data);
 
-  
+      commit("setOutings", res.data);
+    },
+    async createOuting({ commit, dispatch }, outingData) {
+      try {
+        let res = await api.post("outing", outingData);
+        dispatch("getOutings", outingData);
+      } catch (error) {
+        console.warn(error.message);
+      }
+    }
+
     //#endregion
   },
   modules: {}
