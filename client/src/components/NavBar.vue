@@ -12,7 +12,7 @@
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <li>
           <a class="dropdown-item" href="#">
-            <router-link to="/">Home</router-link>|
+            <router-link :to="'/home/' + user._id">Home</router-link>|
           </a>
         </li>
         <li>
@@ -37,11 +37,6 @@
         <img id="logoButton" src="../assets/BarHopLogo.png" alt />
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <li>
-          <a class="dropdown-item" href="#">
-            <router-link :to="'/home/' + user._id">Home</router-link>|
-          </a>
-        </li>
         <li>
           <a class="dropdown-item" href="#">
             <router-link :to="'/profile/' + user._id">Profile</router-link>
