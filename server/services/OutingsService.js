@@ -5,6 +5,13 @@ import ApiError from "../utils/ApiError";
 const _repository = mongoose.model("Outing", Outing);
 
 class OutingService {
+  async getAllOutings() {
+    let data = await _repository.find();
+    if (!data) {
+      throw new ApiError("Invalid User Id", 400);
+    }
+    return data;
+  }
   async getById(userId) {
     let data = await _repository.findOne({ userId: userId });
     if (!data) {
