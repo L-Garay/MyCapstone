@@ -30,7 +30,7 @@
       <div class="col-4">
         <h1>Upcoming</h1>
         <ol>
-          <li v-for="outing in outings" :key="outing._id">{{outing.name}}</li>
+          <li v-for="outing in outings" :key="outing._id"><router-link :to="{name: 'upcoming', params: {outingId: outing._id}}"><b>{{outing.name}}</b></router-link></li>
         </ol>
       </div>
     </div>

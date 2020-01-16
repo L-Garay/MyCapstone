@@ -5,6 +5,7 @@ import Login from "../views/Login.vue";
 import Profile from "../views/Profile.vue";
 import Create from "../views/Create.vue";
 import About from "../views/About.vue";
+import Upcoming from "../views/Upcoming.vue";
 
 Vue.use(VueRouter);
 
@@ -39,6 +40,11 @@ const routes = [
     path: "/about",
     name: "about",
     component: About
+  },
+  {
+    path: "/upcoming",
+    name: "upcoming",
+    component: Upcoming
   },
   {
     path: "*",
