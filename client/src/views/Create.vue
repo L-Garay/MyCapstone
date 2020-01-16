@@ -2,6 +2,7 @@
 <div class="container-fluid">
   <div class="row">
     <navbar />
+    <GoogleMap />
   </div>
   <div class="row"> 
     <form @submit.prevent="createOuting">
@@ -33,6 +34,7 @@
 
 <script>
 import Navbar from "@/components/NavBar.vue";
+import GoogleMap from "@/components/GoogleMap.vue"
 export default {
   data(){
     return {
@@ -43,7 +45,8 @@ export default {
     }
   },
   components: {
-    Navbar
+    Navbar,
+    GoogleMap
   },
   methods:{
      async createOuting(){
