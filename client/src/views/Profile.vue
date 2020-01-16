@@ -14,19 +14,67 @@
         <h5 style="color:white">Invites( )</h5>
       </div>
       <div class="col-6">
-        <h4 style="color:white">Name:{{profile.name}}</h4>
-        <h4 style="color:white">Age:{{profile.age}}</h4>
-        <h4 style="color:white">Address:{{profile.address}}</h4>
-        <h4 style="color:white">Phone:{{profile.phone}}</h4>
-        <h4 style="color:white">Take Me Home:{{profile.tmh}}</h4>
+        <h5 style="color:white">Name:{{ profile.name }}</h5>
+        <h5 style="color:white">Age:{{ profile.age }}</h5>
+        <h5 style="color:white">Address:{{ profile.address }}</h5>
+        <h5 style="color:white">Phone:{{ profile.phone }}</h5>
+        <h5 style="color:white">Take Me Home:{{ profile.tmh }}</h5>
+        <div>
+          <button class="btn btn-primary" type="button" @click="showForm">
+            Edit Profile
+          </button>
+        </div>
+      </div>
+      <div>
+        <modal name="profileModal">
+          <form class="form" @submit.prevent="editProfile">
+            <div class="form-group">
+              <input
+                type="text"
+                name="name"
+                v-model="newProfile.name"
+                placeholder="Change name"
+              />
+              <input
+                type="text"
+                name="age"
+                v-model="newProfile.age"
+                placeholder="Change age"
+              />
+              <input
+                type="text"
+                name="address"
+                v-model="newProfile.address"
+                placeholder="Change address"
+              />
+              <input
+                type="text"
+                name="phone"
+                v-model="newProfile.phone"
+                placeholder="Change phone"
+              />
+              <input
+                type="text"
+                name="tmh"
+                v-model="newProfile.tmh"
+                placeholder="Change tmh"
+              />
+            </div>
+            <button @click="hideForm" class="btn" type="submit">
+              Submit Changes
+            </button>
+          </form>
+        </modal>
       </div>
     </div>
     <div class="row">
       <div class="col-6">
-        <h1 style="color:white">Top Drinks</h1>
+        <h4 style="color:white">Top Drinks</h4>
+        <div class="listSection"></div>
       </div>
       <div class="col-6">
-        <h1 style="color:white">Top Bars</h1>
+        <h4 style="color:white">Top Bars</h4>
+        <div class="listSection"></div>
       </div>
     </div>
   </div>
@@ -35,8 +83,44 @@
 <script>
 import Navbar from "@/components/NavBar.vue";
 export default {
-  components: {
-    Navbar
+  data() {
+    return {
+      newProfile: {
+        name: "",
+        age: "",
+        phone: "",
+        address: "",
+        tmh: "",
+        userId: this.$route.params.id
+      }
+    };
+  },
+  methods: {
+    editProfile() {
+      let editedProfile = {
+        name: this._data.newProfile.name || this.$store.state.profile.name,
+        age: this._data.newProfile.age || this.$store.state.profile.age,
+        phone: this._data.newProfile.phone || this.$store.state.profile.phone,
+        address:
+          this._data.newProfile.address || this.$store.state.profile.address,
+        tmh: this._data.newProfile.tmh || this.$store.state.profile.tmh,
+        userId: this._data.newProfile.userId
+      };
+      this.$store.dispatch("editProfile", editedProfile);
+      let newProfile = {
+        name: "",
+        age: "",
+        phone: "",
+        address: "",
+        tmh: ""
+      };
+    },
+    showForm() {
+      this.$modal.show("profileModal");
+    },
+    hideForm() {
+      this.$modal.hide("profileModal");
+    }
   },
   mounted() {
     this.$store.dispatch("getProfileByUserId", this.$route.params.id);
@@ -45,6 +129,9 @@ export default {
     profile() {
       return this.$store.state.profile;
     }
+  },
+  components: {
+    Navbar
   }
 };
 </script>
@@ -56,5 +143,12 @@ export default {
 #profile-picture {
   height: 10em;
   border-radius: 50%;
+}
+.listSection {
+  height: 40vh;
+  background-color: rgb(169, 169, 169, 0.4);
+}
+.form {
+  width: 200px;
 }
 </style>

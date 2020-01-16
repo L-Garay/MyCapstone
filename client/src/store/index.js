@@ -102,6 +102,18 @@ export default new Vuex.Store({
         console.warn(error.message);
       }
     },
+    async editProfile({ commit, dispatch }, editedProfile) {
+      try {
+        debugger;
+        let data = await api.put(
+          "profile/" + editedProfile.userId,
+          editedProfile
+        );
+        commit("setProfile", data.data);
+      } catch (error) {
+        console.warn(error);
+      }
+    },
 
     //#endregion
     //#region -- Outing STUFF --
