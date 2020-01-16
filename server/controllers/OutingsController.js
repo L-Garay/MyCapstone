@@ -8,6 +8,7 @@ export default class ProfileController {
     this.router = express
       .Router()
       .use(Authorize.authenticated)
+      .get("", this.getAllOutings)
       .get("/:id", this.getById)
       .post("", this.create)
       .put("/:id", this.edit)
@@ -19,6 +20,14 @@ export default class ProfileController {
     next({ status: 404, message: "No Such Route" });
   }
 
+  async getAllOutings(req, res, next) {
+    try {
+      let data = await _outingService.getAllOutings(req.params.id);
+      return res.send(data);
+    } catch (error) {
+      next(error);
+    }
+  }
   async getById(req, res, next) {
     try {
       let data = await _outingService.getById(req.params.id);
