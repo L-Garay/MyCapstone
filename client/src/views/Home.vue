@@ -30,7 +30,7 @@
       <div class="col-4">
         <h1>Upcoming</h1>
         <ol>
-          <liv v-for="outing in outings" :key="outing._id">{{outing.name}}</liv>
+          <li v-for="outing in outings" :key="outing._id">{{outing.name}}</li>
         </ol>
       </div>
     </div>
