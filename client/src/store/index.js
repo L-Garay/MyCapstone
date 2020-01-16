@@ -62,7 +62,6 @@ export default new Vuex.Store({
       try {
         let user = await UserService.Login(creds);
         console.log(user);
-        
         commit("setUser", user);
         router.push({ name: "home" });
       } catch (e) {
@@ -94,9 +93,9 @@ export default new Vuex.Store({
         console.warn(e.message);
       }
     },
-    async getProfileByUserId({ commit, dispatch }) {
+    async getProfileByUserId({ commit, dispatch }, userId) {
       try {
-        await api.get("profile/" + this.state.user._id).then(res => {
+        await api.get("profile/" + userId).then(res => {
           commit("setProfile", res.data);
         });
       } catch (error) {
