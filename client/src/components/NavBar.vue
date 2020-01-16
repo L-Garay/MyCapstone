@@ -39,7 +39,7 @@
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <li>
           <a class="dropdown-item" href="#">
-            <router-link to="/">Home</router-link>|
+            <router-link :to="'/home/' + user._id">Home</router-link>|
           </a>
         </li>
         <li>
