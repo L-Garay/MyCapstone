@@ -5,7 +5,7 @@
     </div>
     <div class="row">
       <div class="col">
-        <p>this is the spot for the image carousel </p>
+        <p>this is the spot for the image carousel</p>
       </div>
     </div>
     <div class="row">
@@ -20,7 +20,11 @@
         <ol>
           <li>outing title</li>
         </ol>
-        <img id="status-picture" src="https://www.pinclipart.com/picdir/middle/211-2118971_happy-face-chalk-png-hope-you-enjoy-my.png" alt="">
+        <img
+          id="status-picture"
+          src="https://www.pinclipart.com/picdir/middle/211-2118971_happy-face-chalk-png-hope-you-enjoy-my.png"
+          alt
+        />
         <button class="btn btn-dark">Create</button>
       </div>
       <div class="col-4">
@@ -40,19 +44,19 @@ export default {
   components: {
     Navbar
   },
-  mounted(){
-    this.$store.dispatch("getProfileByUserId")
+  mounted() {
+    this.$store.dispatch("getProfileByUserId", this.$route.params.id);
   },
-  computed:{
-    profile(){
-      return this.$store.state.profile
+  computed: {
+    profile() {
+      return this.$store.state.profile;
     }
   }
 };
 </script>
 <style>
-#status-picture{
+#status-picture {
   height: 7em;
-  border-radius: 50%
+  border-radius: 50%;
 }
 </style>
