@@ -40,7 +40,7 @@ export default new Vuex.Store({
     resetState(state) {
       state.user = {};
     },
-    setOuting(state, payload) {
+    setOutings(state, payload) {
       state.outings = payload;
     },
     addOuting(state, outing) {
@@ -102,15 +102,25 @@ export default new Vuex.Store({
         console.warn(error.message);
       }
     },
-    async createOuting({ commit, dispatch }, outingData) {
-      try {
-        let res = await api.post("outing", outingData);
-        dispatch("getOutings", outingData);
-      } catch (error) {
-        console.warn(error.message);
-      }
-    }
+    
+    //#endregion
+    //#region -- Outing STUFF --
+        async getAllOutings({ commit, dispatch }) {
+            let res = await api.get("outing");
+            console.log("these are all of the outings", res.data);
+            
+            commit("setOutings", res.data)
+        },
+        async createOuting({ commit, dispatch }, outingData) {
+          try {
+            let res = await api.post("outing", outingData);
+            dispatch("getOutings", outingData);
+          } catch (error) {
+            console.warn(error.message);
+          }
+        }
 
+  
     //#endregion
   },
   modules: {}

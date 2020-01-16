@@ -30,7 +30,7 @@
       <div class="col-4">
         <h1>Upcoming</h1>
         <ol>
-          <li>outing title</li>
+          <liv v-for="outing in outings" :key="outing._id">{{outing.name}}</liv>
         </ol>
       </div>
     </div>
@@ -46,8 +46,12 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getProfileByUserId", this.$route.params.id);
+    this.$store.dispatch("getAllOutings")
   },
   computed: {
+    outings(){
+      return this.$store.state.outings
+    },
     profile() {
       return this.$store.state.profile;
     }
