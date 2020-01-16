@@ -38,6 +38,12 @@ export default new Vuex.Store({
     },
     resetState(state) {
       state.user = {};
+    },
+    setOuting(state, payload){
+      state.outings = payload
+    },
+    addOuting(state, outing){
+      state.outings.push(outing)
     }
   },
   actions: {
@@ -90,6 +96,14 @@ export default new Vuex.Store({
         let pro = await api.get("profile/" + this.state.user._id).then(res =>{          
           commit("setProfile", res.data)
         })
+      } catch (error) {
+        console.warn(error.message)
+      }
+    },
+    async createOuting({commit, dispatch}, outingData){
+      try {
+        let res = await api.post("outings",outingData)
+        dispatch("getOutings", outingData)
       } catch (error) {
         console.warn(error.message)
       }
