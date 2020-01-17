@@ -5,14 +5,6 @@ import ApiError from "../utils/ApiError";
 const _repository = mongoose.model("Drink", Drink);
 
 class DrinkService {
-  async getByUserId(userId) {
-    let data = await _repository.find({ userId: userId });
-    if (!data) {
-      throw new ApiError("Invalid User Id", 400);
-    }
-    return data;
-  }
-
   async getOutingDrinks(outingId, userId) {
     let data = await _repository.find({ outingId: outingId, userId: userId });
     if (!data) {
