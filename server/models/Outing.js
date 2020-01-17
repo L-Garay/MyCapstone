@@ -8,7 +8,8 @@ const Outing = new Schema(
     name: { type: String, required: true },
     date: { type: Date, required: true },
     startingPoint: { type: String },
-    bars: { type: Array }
+    bars: { type: Array },
+    attendees: { type: Array }
   },
   { timestamps: true, toJSON: { virtuals: true } }
 );

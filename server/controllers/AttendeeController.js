@@ -11,7 +11,7 @@ export default class OutingController {
       .use(Authorize.authenticated)
       .get("", this.getAllOutings)
       .get("/:id", this.getById)
-      .get("/:id/drinks", this.getOutingDrinks)
+      .get("/:id/drinks", this.getAttendeeDrinks)
       .post("", this.create)
       .put("/:id", this.edit)
       .delete("/:id", this.delete)
@@ -22,26 +22,9 @@ export default class OutingController {
     next({ status: 404, message: "No Such Route" });
   }
 
-  async getAllOutings(req, res, next) {
+  async getAttendeeDrinks(req, res, next) {
     try {
-      let data = await _outingService.getAllOutings();
-      return res.send(data);
-    } catch (error) {
-      next(error);
-    }
-  }
-  async getById(req, res, next) {
-    try {
-      let data = await _outingService.getById(req.params.id);
-      return res.send(data);
-    } catch (error) {
-      next(error);
-    }
-  }
-
-  async getOutingDrinks(req, res, next) {
-    try {
-      let data = await _drinkService.getOutingDrinks(req.params.id);
+      let data = await _drinkService.getAttendeeDrinks(req.params.id);
       return res.send(data);
     } catch (error) {
       next(error);
