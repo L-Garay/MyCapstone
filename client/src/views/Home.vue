@@ -25,12 +25,16 @@
           src="https://www.pinclipart.com/picdir/middle/211-2118971_happy-face-chalk-png-hope-you-enjoy-my.png"
           alt
         />
-        <button class="btn btn-dark">Create</button>
+        <router-link to="/create"><button class="btn btn-dark">Create</button></router-link>
       </div>
       <div class="col-4">
         <h1>Upcoming</h1>
         <ol>
-          <li v-for="outing in outings" :key="outing._id"><router-link :to="{name: 'upcoming', params: {outingId: outing._id}}"><b>{{outing.name}}</b></router-link></li>
+          <li v-for="outing in outings" :key="outing._id">
+            <router-link :to="{name: 'upcoming', params: {outingId: outing._id}}">
+              <b>{{outing.name}}</b>
+            </router-link> 
+          </li>
         </ol>
       </div>
     </div>

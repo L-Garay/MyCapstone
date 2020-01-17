@@ -130,6 +130,16 @@ export default new Vuex.Store({
       } catch (error) {
         console.warn(error.message);
       }
+    },
+    async deleteOuting({ commit, dispatch }, outing) {
+      console.log("this is the outing thats being deleted",outing);
+      await api.delete("outing/" + outing._id);
+      dispatch("getAllOutings");
+    },
+    async editOuting({ commit, dispatch }, editedOuting) {
+      console.log("this is the outing thats being edited",editedOuting);
+      await api.put("outing/" + editedOuting._id, editedOuting);
+      dispatch("getAllOutings");
     }
 
     //#endregion

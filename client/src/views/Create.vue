@@ -15,6 +15,9 @@
       <input v-model="newOuting.date" type="date">
     </div>
     <button class="btn-success" type="submit">Lets Do This!</button>
+    <router-link to="/">
+    <button class="btn-danger" type="button">Never Mind :(</button>
+    </router-link>
     </form>
     <div class="col-6">
       this is where we put in options for starting bar
