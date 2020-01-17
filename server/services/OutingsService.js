@@ -25,37 +25,32 @@ class OutingService {
     return data;
   }
 
-  async edit(userId, authId, update) {
-    if (userId !== authId) {
-      throw new ApiError("This isn't your outing", 400);
-    } else {
-      let data = await _repository.findOneAndUpdate(
-        { userId: userId },
-        update,
-        {
-          new: true
-        }
-      );
-      if (!data) {
-        throw new ApiError("Invalid User Id", 400);
+  async edit(outingId, authorId, update) {
+    let data = await _repository.findOneAndUpdate(
+      { _id: outingId,
+      authorId: authorId },
+      update,
+      {
+        new: true
       }
-      return data;
+    );
+    if (!data) {
+      throw new ApiError("Invalid User Id", 400);
     }
+    return data;
   }
 
-  async delete(userId, authId) {
-    if (userId !== authId) {
-      throw new ApiError("This isn't your outing", 400);
-    } else {
-      let data = await _repository.findOneAndRemove({
-        userId: userId
-      });
-      if (!data) {
-        throw new ApiError("Invalid User Id", 400);
-      }
+  async delete(outingId, authorId) {
+    let data = await _repository.findOneAndRemove({
+      _id: outingId,
+      authorId: authorId
+    });
+    if (!data) {
+      throw new ApiError("Invalid User Id", 400);
     }
   }
 }
+    
 
 const _outingService = new OutingService();
 export default _outingService;
