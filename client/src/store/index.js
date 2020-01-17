@@ -126,7 +126,7 @@ export default new Vuex.Store({
     async createOuting({ commit, dispatch }, outingData) {
       try {
         let res = await api.post("outing", outingData);
-        dispatch("getOutings", outingData);
+        dispatch("getAllOutings", outingData);
       } catch (error) {
         console.warn(error.message);
       }
