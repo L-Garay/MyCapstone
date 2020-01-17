@@ -2,6 +2,7 @@ import express from "express";
 import { Authorize } from "../middleware/authorize.js";
 import _outingService from "../services/OutingsService";
 import _drinkService from "../services/DrinksService";
+import _attendeeService from "../services/AttendeeService";
 
 //PUBLIC
 export default class OutingController {
@@ -12,6 +13,7 @@ export default class OutingController {
       .get("", this.getAllOutings)
       .get("/:id", this.getById)
       .get("/:id/drinks", this.getOutingDrinks)
+      .get("/:id/attendees", this.getOutingAttendees)
       .post("", this.create)
       .put("/:id", this.edit)
       .delete("/:id", this.delete)
@@ -47,7 +49,14 @@ export default class OutingController {
       next(error);
     }
   }
-
+  async getOutingAttendees(req, res, next) {
+    try {
+      let data = await _attendeeService.getOutingAttendees(req.params.id);
+      return res.send(data);
+    } catch (error) {
+      next(error);
+    }
+  }
   async create(req, res, next) {
     try {
       req.body.authorId = req.session.uid;
