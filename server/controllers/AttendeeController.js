@@ -1,7 +1,7 @@
 import express from "express";
 import { Authorize } from "../middleware/authorize.js";
-import _outingService from "../services/OutingsService";
 import _drinkService from "../services/DrinksService";
+import _attendeeService from "../services/AttendeeService";
 
 //PUBLIC
 export default class OutingController {
@@ -9,7 +9,6 @@ export default class OutingController {
     this.router = express
       .Router()
       .use(Authorize.authenticated)
-      .get("", this.getAllOutings)
       .get("/:id", this.getById)
       .get("/:id/drinks", this.getAttendeeDrinks)
       .post("", this.create)
@@ -20,6 +19,15 @@ export default class OutingController {
 
   defaultRoute(req, res, next) {
     next({ status: 404, message: "No Such Route" });
+  }
+
+  async getById(req, res, next) {
+    try {
+      let data = await _attendeeService.getById(req.params.id);
+      return res.send(data);
+    } catch (error) {
+      next(error);
+    }
   }
 
   async getAttendeeDrinks(req, res, next) {
@@ -34,7 +42,7 @@ export default class OutingController {
   async create(req, res, next) {
     try {
       req.body.authorId = req.session.uid;
-      let data = await _outingService.create(req.body);
+      let data = await _attendeeService.create(req.body);
       return res.status(201).send(data);
     } catch (error) {
       next(error);
@@ -43,7 +51,7 @@ export default class OutingController {
 
   async edit(req, res, next) {
     try {
-      let data = await _outingService.edit(
+      let data = await _attendeeService.edit(
         req.params.id,
         req.session.uid,
         req.body
@@ -56,7 +64,7 @@ export default class OutingController {
 
   async delete(req, res, next) {
     try {
-      await _outingService.delete(req.params.id, req.session.uid);
+      await _attendeeService.delete(req.params.id, req.session.uid);
       return res.send("Successfully deleted");
     } catch (error) {
       next(error);
