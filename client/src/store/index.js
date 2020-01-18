@@ -140,8 +140,13 @@ export default new Vuex.Store({
       console.log("this is the outing thats being edited",editedOuting);
       await api.put("outing/" + editedOuting._id, editedOuting);
       dispatch("getAllOutings");
+    },
+    getBarsFromGoogle({commit, dispatch}, coords){
+      console.log(coords);
+      
+      let res = api.get(`barSearch?lat=${coords.lat}&lng=${coords.lng}`)
+      let searchResults = res.data
     }
-
     //#endregion
   },
   modules: {}

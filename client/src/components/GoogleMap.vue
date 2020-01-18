@@ -1,7 +1,15 @@
 <template>
+<div class="map">
+  <button class="btn-info" @click.prevent="findLocation">Search</button>
   <div id="googleMap" style="width: 70vw; height: 300px"></div>
+
+</div>
 </template>
 <script>
+import axios from "axios"
+let _placeApi = axios.create({
+  baseURL: "//maps.googleapis.com/maps/api/place/textsearch/json?key=AIzaSyA5NIwJK-lCXu1JGuCg7MUYnkbppHvbX58&query=bar"
+})
 export default {
   name: "GoogleMap",
   props: ["lat", "lng"],
@@ -17,7 +25,14 @@ export default {
           zoom: 15
         }
       );
-    }
+    },
+    findLocation(){
+      navigator.geolocation.getCurrentPosition((position)=>{
+      this.$store.dispatch("getBarsFromGoogle", {lat: position.coords.latitude, lng: position.coords.longitude})
+    }, (e)=>{
+      console.error(e)
+    })
+}
   }
 };
 </script>
