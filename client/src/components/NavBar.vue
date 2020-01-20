@@ -68,7 +68,10 @@ export default {
       )
     };
   },
-  mounted() {},
+  mounted() {
+    this.$store.dispatch("getActiveOuting");
+    this.$store.dispatch("getActiveAttendee");
+  },
   methods: {
     logout() {
       navigator.geolocation.clearWatch(this.wpid);

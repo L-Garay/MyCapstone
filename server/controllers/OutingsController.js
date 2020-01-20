@@ -46,7 +46,7 @@ export default class OutingController {
   }
   async getById(req, res, next) {
     try {
-      let data = await _outingService.getById(req.params.id);
+      let data = await _outingService.getById(req.params.id, req.session.uid);
       return res.send(data);
     } catch (error) {
       next(error);

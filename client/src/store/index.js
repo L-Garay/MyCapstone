@@ -53,6 +53,10 @@ export default new Vuex.Store({
       state.searchResults = searchResults;
       console.log("storeee", this.state.searchResults);
     },
+    setActiveOuting(state, outing) {
+      state.activeOuting = outing;
+      console.log("settingActiveOuting", outing);
+    },
     setActiveAttendee(state, attendee) {
       state.activeAttendee = attendee;
     },
@@ -161,10 +165,16 @@ export default new Vuex.Store({
       let searchResults = res.data.results;
       commit("setSearchResults", searchResults);
     },
+    async getActiveOuting({ commit, dispatch }) {
+      let res = await api.get("outing/" + this.state.user._id);
+      commit("setActiveOuting", res);
+    },
     async getActiveAttendee({ commit, dispatch }) {
       let res = await api.get(
         "outing/" + this.state.activeOuting._id + "/user"
       );
+      console.log("ActiveAttendee", res);
+
       commit("setActiveAttendee", res);
     },
     async updateAttendeeLocation({ commit, dispatch }, position) {

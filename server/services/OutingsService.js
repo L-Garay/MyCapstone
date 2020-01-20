@@ -12,7 +12,7 @@ class OutingService {
     }
     return data;
   }
-  async getById(userId) {
+  async getById(userId, authId) {
     let data = await _repository.findOne({ userId: userId });
     if (!data) {
       throw new ApiError("Invalid User Id", 400);
@@ -27,8 +27,7 @@ class OutingService {
 
   async edit(outingId, authorId, update) {
     let data = await _repository.findOneAndUpdate(
-      { _id: outingId,
-      authorId: authorId },
+      { _id: outingId, authorId: authorId },
       update,
       {
         new: true
@@ -50,7 +49,6 @@ class OutingService {
     }
   }
 }
-    
 
 const _outingService = new OutingService();
 export default _outingService;
