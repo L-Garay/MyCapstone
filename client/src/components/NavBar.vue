@@ -69,8 +69,8 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch("getActiveOuting");
-    this.$store.dispatch("getActiveAttendee");
+    this.$store.dispatch("getActiveOuting", this.$route.params.id);
+    // this.$store.dispatch("getActiveAttendee");
   },
   methods: {
     logout() {

@@ -22,9 +22,7 @@ export default new Vuex.Store({
     user: {},
     profile: {},
     outings: [],
-    activeOuting: {
-      members: []
-    },
+    activeOuting: {},
     searchResults: [],
     bars: [],
     friends: [],
@@ -143,7 +141,17 @@ export default new Vuex.Store({
     async createOuting({ commit, dispatch }, outingData) {
       try {
         let res = await api.post("outing", outingData);
+        let attendee = { outingId: res.data._id, userId: res.data.authorId };
         dispatch("getAllOutings", outingData);
+        dispatch("createAttendee", attendee);
+      } catch (error) {
+        console.warn(error.message);
+      }
+    },
+    async createAttendee({ commit, dispatch }, attendee) {
+      try {
+        let created = await api.post("attendee", attendee);
+        console.log("This is your attendee", created.data);
       } catch (error) {
         console.warn(error.message);
       }
@@ -165,9 +173,13 @@ export default new Vuex.Store({
       let searchResults = res.data.results;
       commit("setSearchResults", searchResults);
     },
-    async getActiveOuting({ commit, dispatch }) {
-      let res = await api.get("outing/" + this.state.user._id);
-      commit("setActiveOuting", res);
+    async getActiveOuting({ commit, dispatch }, userId) {
+      console.log("This is the User Id", userId);
+
+      let res = await api.get("outing/" + userId);
+      console.log("GotactiveOuting", res.data);
+      commit("setActiveOuting", res.data);
+      dispatch("getActiveAttendee");
     },
     async getActiveAttendee({ commit, dispatch }) {
       let res = await api.get(

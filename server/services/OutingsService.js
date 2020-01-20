@@ -13,7 +13,7 @@ class OutingService {
     return data;
   }
   async getById(userId, authId) {
-    let data = await _repository.findOne({ userId: userId });
+    let data = await _repository.findOne({ authorId: userId });
     if (!data) {
       throw new ApiError("Invalid User Id", 400);
     }

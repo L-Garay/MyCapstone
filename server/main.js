@@ -44,6 +44,7 @@ import ProfileController from "./controllers/ProfileController";
 import OutingController from "./controllers/OutingsController";
 import DrinkController from "./controllers/DrinksController";
 import BarSearchController from "./controllers/BarSearchController";
+import AttendeeController from "./controllers/AttendeeController";
 
 //NOTE remember the forward slash at the start of your path!'
 server.use("/account", new UserController().router);
@@ -51,6 +52,7 @@ server.use("/api/profile", new ProfileController().router);
 server.use("/api/outing", new OutingController().router);
 server.use("/api/drinks", new DrinkController().router);
 server.use("/api/barSearch", new BarSearchController().router);
+server.use("/api/attendee", new AttendeeController().router);
 
 //NOTE Everything below this line always stays the same
 

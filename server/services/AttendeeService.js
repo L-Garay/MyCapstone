@@ -30,7 +30,7 @@ class AttendeeService {
 
   async getByOutingAndUser(outingId, userId) {
     let data = await _repository.findOne({
-      outingId: outingId,
+      // outingId: outingId,
       userId: userId
     });
     if (!data) {
