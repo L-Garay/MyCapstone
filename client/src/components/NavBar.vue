@@ -69,7 +69,7 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch("getActiveOuting", this.$route.params.id);
+    // this.$store.dispatch("getActiveOuting", this.$route.params.id);
     // this.$store.dispatch("getActiveAttendee");
   },
   methods: {
