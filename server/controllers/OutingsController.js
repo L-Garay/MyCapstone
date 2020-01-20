@@ -33,6 +33,17 @@ export default class OutingController {
       next(error);
     }
   }
+
+  async getActiveAttendee(req, res, next) {
+    try {
+      let data = await _attendeeService.getByOutingAndUser(
+        req.params.id,
+        req.session.uid
+      );
+    } catch (error) {
+      next(error);
+    }
+  }
   async getById(req, res, next) {
     try {
       let data = await _outingService.getById(req.params.id);
