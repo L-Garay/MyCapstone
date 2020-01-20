@@ -54,9 +54,32 @@
 <script>
 export default {
   name: "Navbar",
+  data() {
+    return {
+      geo_options: {
+        enableHighAccuracy: true,
+        maximumAge: 3000,
+        timeout: 5000
+      },
+      wpid: navigator.geolocation.watchPosition(
+        this.geo_success,
+        this.geo_error,
+        this.geo_options
+      )
+    };
+  },
+  mounted() {},
   methods: {
     logout() {
+      navigator.geolocation.clearWatch(this.wpid);
       this.$store.dispatch("logout");
+    },
+    geo_success(position) {
+      this.$store.dispatch("updateAttendeeLocation", position.coords);
+    },
+
+    geo_error() {
+      alert("Sorry, no position available.");
     }
   },
   computed: {
