@@ -12,6 +12,7 @@ export default class OutingController {
       .use(Authorize.authenticated)
       .get("", this.getAllOutings)
       .get("/:id", this.getById)
+      .get("/:id/user", this.getActiveAttendee)
       .get("/:id/drinks", this.getOutingDrinks)
       .get("/:id/attendees", this.getOutingAttendees)
       .post("", this.create)

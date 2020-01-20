@@ -4,6 +4,7 @@ import UserService from "../UserService";
 import router from "../router/index";
 // @ts-ignore
 import Axios from "axios";
+import Outing from "../../../server/models/Outing";
 
 Vue.use(Vuex);
 let base = window.location.host.includes("localhost:8080")
@@ -24,12 +25,13 @@ export default new Vuex.Store({
     activeOuting: {
       members: []
     },
-    searchResults:[],
+    searchResults: [],
     bars: [],
     friends: [],
     drinks: [],
     comments: [],
-    photos: []
+    photos: [],
+    activeAttendee: {}
   },
   mutations: {
     setUser(state, user) {
@@ -47,9 +49,15 @@ export default new Vuex.Store({
     addOuting(state, outing) {
       state.outings.push(outing);
     },
-    setSearchResults(state, searchResults){
+    setSearchResults(state, searchResults) {
       state.searchResults = searchResults;
-      console.log("storeee",this.state.searchResults);
+      console.log("storeee", this.state.searchResults);
+    },
+    setActiveAttendee(state, attendee) {
+      state.activeAttendee = attendee;
+    },
+    updateLocation(state, attendee) {
+      state.activeAttendee = attendee;
     }
   },
   actions: {
@@ -137,21 +145,35 @@ export default new Vuex.Store({
       }
     },
     async deleteOuting({ commit, dispatch }, outing) {
-      console.log("this is the outing thats being deleted",outing);
+      console.log("this is the outing thats being deleted", outing);
       await api.delete("outing/" + outing._id);
       dispatch("getAllOutings");
     },
     async editOuting({ commit, dispatch }, editedOuting) {
-      console.log("this is the outing thats being edited",editedOuting);
+      console.log("this is the outing thats being edited", editedOuting);
       await api.put("outing/" + editedOuting._id, editedOuting);
       dispatch("getAllOutings");
     },
-    async getBarsFromGoogle({commit, dispatch}, coords){
+    async getBarsFromGoogle({ commit, dispatch }, coords) {
       console.log(coords);
-      
-      let res = await api.get(`barSearch?lat=${coords.lat}&lng=${coords.lng}`)
+
+      let res = await api.get(`barSearch?lat=${coords.lat}&lng=${coords.lng}`);
       let searchResults = res.data.results;
       commit("setSearchResults", searchResults);
+    },
+    async getActiveAttendee({ commit, dispatch }) {
+      let res = await api.get(
+        "outing/" + this.state.activeOuting._id + "/user"
+      );
+      commit("setActiveAttendee", res);
+    },
+    async updateAttendeeLocation({ commit, dispatch }, position) {
+      console.log(position);
+      let updatedAttendee = this.state.activeAttendee;
+      updatedAttendee.location = position;
+      commit("updateLocation", updatedAttendee);
+      let res = await api.put("attendee/" + this.state.activeAttendee._id);
+      console.log(res);
     }
     //#endregion
   },
