@@ -78,7 +78,9 @@ export default {
       this.$store.dispatch("logout");
     },
     geo_success(position) {
-      this.$store.dispatch("updateAttendeeLocation", position.coords);
+      console.log(position);
+
+      // this.$store.dispatch("updateAttendeeLocation", position.coords);
     },
 
     geo_error() {

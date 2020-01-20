@@ -179,7 +179,7 @@ export default new Vuex.Store({
       let res = await api.get("outing/" + userId);
       console.log("GotactiveOuting", res.data);
       commit("setActiveOuting", res.data);
-      dispatch("getActiveAttendee");
+      //dispatch("getActiveAttendee");
     },
     async getActiveAttendee({ commit, dispatch }) {
       let res = await api.get(
