@@ -62,13 +62,14 @@ export default {
       console.log(this.$route.params);
 
       return (
-        this.$store.state.outings.find(
-          o => o._id == this.$route.params.outingId
-        ) || {
+        this.$store.state.outings.find(o => o._id == this.$route.params.id) || {
           title: "Loading..."
         }
       );
     }
+  },
+  mounted() {
+    this.$store.dispatch("getAllOutings");
   },
   methods: {
     deleteOuting(outing) {

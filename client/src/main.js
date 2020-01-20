@@ -19,7 +19,16 @@ Vue.filter("formatDate", function(value) {
 // format this properly for the past view
 Vue.filter("formatPastDate", function(value) {
   if (value) {
-    return moment(String(value)).subtract(1, "hour");
+    return moment(String(value))
+      .add(1, "days")
+      .calendar();
+  }
+});
+Vue.filter("formatUpcomingHomeDate", function(value) {
+  if (value) {
+    return moment(String(value))
+      .endOf("day")
+      .fromNow();
   }
 });
 async function init() {

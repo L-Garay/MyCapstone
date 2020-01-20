@@ -151,4 +151,24 @@ export default {
 .form {
   width: 200px;
 }
+.v--modal {
+  background-color: blanchedalmond !important;
+  width: 300px !important;
+  left: 15rem !important;
+}
+@media only screen and (max-width: 455px) {
+  body div div.v--modal {
+    background-color: grey !important;
+    width: 300px !important;
+    left: 3.5rem !important;
+  }
+}
+form {
+  display: flex;
+  flex-direction: column;
+}
+.modalBtn {
+  border: 1px solid black;
+  background-color: aqua;
+}
 </style>

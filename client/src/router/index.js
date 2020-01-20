@@ -43,7 +43,7 @@ const routes = [
     component: About
   },
   {
-    path: "/upcoming",
+    path: "/upcoming/:id",
     name: "upcoming",
     component: Upcoming
   },

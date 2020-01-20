@@ -1,7 +1,14 @@
 <template>
   <div>
     <navbar />
-    <h3>{{ outing.name }}</h3>
+    <h3>
+      {{ outing.name }}
+      <i
+        @click.prevent="deleteOuting(outing)"
+        style="color:red"
+        class="fas fa-trash"
+      ></i>
+    </h3>
     <h5>{{ outing.date | formatPastDate }}</h5>
   </div>
 </template>
@@ -21,6 +28,11 @@ export default {
           title: "Loading..."
         }
       );
+    }
+  },
+  methods: {
+    deleteOuting(outing) {
+      this.$store.dispatch("deleteOuting", outing);
     }
   }
 };

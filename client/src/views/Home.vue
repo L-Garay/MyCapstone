@@ -17,6 +17,7 @@
               :to="{ name: 'past', params: { outingId: outing._id } }"
             >
               <b>{{ outing.name }}</b>
+              <p>{{ outing.date | formatPastDate }}</p>
             </router-link>
           </li>
         </ol>
@@ -39,10 +40,9 @@
         <h1>Upcoming</h1>
         <ol>
           <li v-for="outing in upcommingOutings" :key="outing._id">
-            <router-link
-              :to="{ name: 'upcoming', params: { outingId: outing._id } }"
-            >
+            <router-link :to="{ name: 'upcoming', params: { id: outing._id } }">
               <b>{{ outing.name }}</b>
+              <p>{{ outing.date | formatUpcomingHomeDate }}</p>
             </router-link>
           </li>
         </ol>
@@ -70,11 +70,31 @@ export default {
   computed: {
     upcommingOutings() {
       let date = new Date();
-      return this.$store.state.outings.filter(o => new Date(o.date) > date);
+      return this.$store.state.outings
+        .filter(o => new Date(o.date) > date)
+        .sort(function(a, b) {
+          if (a.date < b.date) {
+            return -1;
+          } else if (a.date > b.date) {
+            return 1;
+          } else if (a.date == b.date) {
+            return 0;
+          }
+        });
     },
     pastOutings() {
       let date = new Date();
-      return this.$store.state.outings.filter(o => new Date(o.date) < date);
+      return this.$store.state.outings
+        .filter(o => new Date(o.date) < date)
+        .sort(function(a, b) {
+          if (a.date < b.date) {
+            return 1;
+          } else if (a.date > b.date) {
+            return -1;
+          } else if (a.date == b.date) {
+            return 0;
+          }
+        });
     },
     // activeOuting() {
     //   let date = new Date();
@@ -95,5 +115,19 @@ export default {
 #status-picture {
   height: 7em;
   border-radius: 50%;
+}
+li p {
+  font-size: 0.75rem;
+}
+li p {
+  font-size: 0.75rem;
+}
+ol {
+  padding-left: 10pt;
+}
+ol li {
+  box-shadow: 1pt 1pt 2pt black;
+  border: 1pt solid grey;
+  margin: 5pt;
 }
 </style>

@@ -141,9 +141,8 @@ export default new Vuex.Store({
     async createOuting({ commit, dispatch }, outingData) {
       try {
         let res = await api.post("outing", outingData);
-        let attendee = { outingId: res.data._id, userId: res.data.authorId };
-        dispatch("getAllOutings", outingData);
-        dispatch("createAttendee", attendee);
+        dispatch("getAllOutings");
+        router.push({ name: "upcoming", params: { id: res.data._id } });
       } catch (error) {
         console.warn(error.message);
       }
@@ -160,6 +159,7 @@ export default new Vuex.Store({
       console.log("this is the outing thats being deleted", outing);
       await api.delete("outing/" + outing._id);
       dispatch("getAllOutings");
+      router.push({ name: "home", params: { id: outing.authorId } });
     },
     async editOuting({ commit, dispatch }, editedOuting) {
       console.log("this is the outing thats being edited", editedOuting);
