@@ -24,6 +24,7 @@ export default new Vuex.Store({
     activeOuting: {
       members: []
     },
+    searchResults:[],
     bars: [],
     friends: [],
     drinks: [],
@@ -45,6 +46,10 @@ export default new Vuex.Store({
     },
     addOuting(state, outing) {
       state.outings.push(outing);
+    },
+    setSearchResults(state, searchResults){
+      state.searchResults = searchResults;
+      console.log("storeee",this.state.searchResults);
     }
   },
   actions: {
@@ -141,11 +146,12 @@ export default new Vuex.Store({
       await api.put("outing/" + editedOuting._id, editedOuting);
       dispatch("getAllOutings");
     },
-    getBarsFromGoogle({commit, dispatch}, coords){
+    async getBarsFromGoogle({commit, dispatch}, coords){
       console.log(coords);
       
-      let res = api.get(`barSearch?lat=${coords.lat}&lng=${coords.lng}`)
-      let searchResults = res.data
+      let res = await api.get(`barSearch?lat=${coords.lat}&lng=${coords.lng}`)
+      let searchResults = res.data.results;
+      commit("setSearchResults", searchResults);
     }
     //#endregion
   },
