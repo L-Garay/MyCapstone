@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
-    <div class="row">
       <navbar />
+    <div class="row">
       <GoogleMap />
     </div>
     <div class="row">

@@ -87,5 +87,6 @@ export default {
 <style scoped>
 #map {
   height: 100%;
+  width: fit-content
 }
 </style>

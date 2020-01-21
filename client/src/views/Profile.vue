@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid" id="background-image">
-    <div class="row">
       <navbar />
+    <div class="row">
     </div>
     <div class="row">
       <div class="col-6">
