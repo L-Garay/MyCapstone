@@ -4,8 +4,8 @@ let ObjectId = Schema.Types.ObjectId;
 
 const Attendee = new Schema(
   {
-    userId: { type: ObjectId, ref: "User", required: true },
-    outingId: { type: ObjectId, ref: "Outing", required: true },
+    userId: { type: ObjectId, required: true },
+    outingId: { type: ObjectId, required: true },
     drinks: { type: Array },
     status: { type: Number, default: 0 },
     goneHome: { type: Boolean, default: false },
