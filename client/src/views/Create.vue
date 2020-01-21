@@ -17,13 +17,7 @@
         <div class="col-4">
           Bar List
           <ul>
-            <li
-              v-for="bar in this.newOuting.barsList"
-              :key="bar.id"
-              v-model="newOuting.barsList"
-            >
-              {{ bar.name }}
-            </li>
+            <li v-for="bar in this.newOuting.barsList" :key="bar.id">{{ bar.name }}</li>
           </ul>
         </div>
         <button class="btn-success" type="submit">Lets Do This!</button>
@@ -31,14 +25,10 @@
           <button class="btn-danger" type="button">Never Mind :(</button>
         </router-link>
       </form>
-      <div class="col-6">
-        this is where we put in options for starting bar
-      </div>
+      <div class="col-6">this is where we put in options for starting bar</div>
     </div>
     <div class="row">
-      <div class="col">
-        maps go here
-      </div>
+      <div class="col">maps go here</div>
     </div>
     <div class="row">
       <div class="col-6">
