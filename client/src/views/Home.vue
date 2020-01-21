@@ -5,13 +5,59 @@
     </div>
     <div class="row">
       <div class="col">
-        <p>this is the spot for the image carousel</p>
+        <div
+          id="carouselExampleControls"
+          class="carousel slide"
+          data-ride="carousel"
+        >
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img
+                src="../assets/bar1.jpg"
+                class="d-block w-100 carouselImgs"
+                alt="..."
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                src="../assets/bar2.jpg"
+                class="d-block w-100 carouselImgs"
+                alt="..."
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                src="../assets/bar3.jpg"
+                class="d-block w-100 carouselImgs"
+                alt="..."
+              />
+            </div>
+          </div>
+          <a
+            class="carousel-control-prev"
+            href="#carouselExampleControls"
+            role="button"
+            data-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a
+            class="carousel-control-next"
+            href="#carouselExampleControls"
+            role="button"
+            data-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
       </div>
     </div>
     <div class="row">
       <div class="col-4">
         <h1>Past</h1>
-        <ol>
+        <ol class="overflow">
           <li v-for="outing in pastOutings" :key="outing._id">
             <router-link
               :to="{ name: 'past', params: { outingId: outing._id } }"
@@ -38,7 +84,7 @@
       </div>
       <div class="col-4">
         <h1>Upcoming</h1>
-        <ol>
+        <ol class="overflow">
           <li v-for="outing in upcommingOutings" :key="outing._id">
             <router-link :to="{ name: 'upcoming', params: { id: outing._id } }">
               <b>{{ outing.name }}</b>
@@ -129,5 +175,12 @@ ol li {
   box-shadow: 1pt 1pt 2pt black;
   border: 1pt solid grey;
   margin: 5pt;
+}
+.carouselImgs {
+  height: 200px;
+}
+.overflow {
+  height: 70vh;
+  overflow-y: scroll;
 }
 </style>

@@ -28,11 +28,12 @@
             v-model="newOuting.name"
             placeholder="Change name"
           />
+          <label for="datetime-local">When:</label>
           <input
-            type="datetime-local"
-            name="age"
+            class="form-control"
             v-model="newOuting.date"
-            placeholder="Change age"
+            type="datetime-local"
+            value="2020-01-01T12:00:00"
           />
         </div>
         <button @click="hideEditOuting" class="btn" type="submit">
