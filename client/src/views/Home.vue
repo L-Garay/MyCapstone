@@ -1,36 +1,19 @@
 <template>
   <div class="container-fluid">
-      <navbar />
-    <div class="row">
-    </div>
+    <navbar />
+    <div class="row"></div>
     <div class="row">
       <div class="col">
-        <div
-          id="carouselExampleControls"
-          class="carousel slide"
-          data-ride="carousel"
-        >
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img
-                src="../assets/bar1.jpg"
-                class="d-block w-100 carouselImgs"
-                alt="..."
-              />
+              <img src="../assets/bar1.jpg" class="d-block w-100 carouselImgs" alt="..." />
             </div>
             <div class="carousel-item">
-              <img
-                src="../assets/bar2.jpg"
-                class="d-block w-100 carouselImgs"
-                alt="..."
-              />
+              <img src="../assets/bar2.jpg" class="d-block w-100 carouselImgs" alt="..." />
             </div>
             <div class="carousel-item">
-              <img
-                src="../assets/bar3.jpg"
-                class="d-block w-100 carouselImgs"
-                alt="..."
-              />
+              <img src="../assets/bar3.jpg" class="d-block w-100 carouselImgs" alt="..." />
             </div>
           </div>
           <a
@@ -59,9 +42,7 @@
         <h1>Past</h1>
         <ol class="overflow">
           <li v-for="outing in pastOutings" :key="outing._id">
-            <router-link
-              :to="{ name: 'past', params: { outingId: outing._id } }"
-            >
+            <router-link :to="{ name: 'past', params: { outingId: outing._id } }">
               <b>{{ outing.name }}</b>
               <p>{{ outing.date | formatPastDate }}</p>
             </router-link>
@@ -78,9 +59,9 @@
           src="https://www.pinclipart.com/picdir/middle/211-2118971_happy-face-chalk-png-hope-you-enjoy-my.png"
           alt
         />
-        <router-link to="/create"
-          ><button class="btn btn-dark">Create</button></router-link
-        >
+        <router-link to="/create">
+          <button class="btn btn-dark">Create</button>
+        </router-link>
       </div>
       <div class="col-4">
         <h1>Upcoming</h1>
@@ -110,7 +91,8 @@ export default {
     Navbar
   },
   mounted() {
-    this.$store.dispatch("getProfileByUserId", this.$route.params.id);
+    this.$store.dispatch("getProfileByUserId", this.$store.state.user._id);
+
     this.$store.dispatch("getAllOutings");
   },
   computed: {

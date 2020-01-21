@@ -32,6 +32,12 @@ Vue.filter("formatUpcomingHomeDate", function(value) {
   }
 });
 async function init() {
+  let user = await UserService.Authenticate();
+  if (user) {
+    store.commit("setUser", user);
+  } else {
+    router.push({ name: "login" });
+  }
   new Vue({
     router,
     store,
@@ -39,11 +45,5 @@ async function init() {
       return h(App);
     }
   }).$mount("#app");
-  let user = await UserService.Authenticate();
-  if (user) {
-    store.commit("setUser", user);
-  } else {
-    router.push({ name: "login" });
-  }
 }
 init();
