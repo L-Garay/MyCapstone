@@ -4,7 +4,7 @@ let ObjectId = Schema.Types.ObjectId;
 
 const Outing = new Schema(
   {
-    authorId: { type: ObjectId, ref: "User", required: true },
+    authorId: { type: ObjectId, required: true },
     name: { type: String, required: true },
     date: { type: Date, required: true },
     startingPoint: { type: String },

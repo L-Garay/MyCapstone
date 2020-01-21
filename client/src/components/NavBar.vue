@@ -61,13 +61,13 @@ export default {
         maximumAge: 3000,
         timeout: 5000
       },
-      wpid: navigator.geolocation.watchPosition(
-        this.geo_success,
-        this.geo_error,
-        this.geo_options
-      )
-    };
-  },
+      }
+      // wpid: navigator.geolocation.watchPosition(
+      //   this.geo_success,
+      //   this.geo_error,
+      //   this.geo_options
+      // )
+    },
   mounted() {
     // this.$store.dispatch("getActiveOuting", this.$route.params.id);
     // this.$store.dispatch("getActiveAttendee");

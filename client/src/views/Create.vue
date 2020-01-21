@@ -49,6 +49,32 @@
           </li>
         </ul>
       </div>
+
+      <div class="col">
+        <form class="row" @submit.prevent="createOuting">
+          <div class="col-6">
+            <label for="name">Title:</label>
+            <input v-model="newOuting.name" id="name" type="text" />
+          </div>
+          <div class="col-6">
+            <label for="datetime-local">When:</label>
+            <input v-model="newOuting.date" type="date" />
+          </div>
+          <div class="col">
+            <button class="btn-success" type="submit">Lets Do This!</button>
+            <router-link to="/">
+              <button class="btn-danger" type="button">Never Mind :(</button>
+            </router-link>
+          </div>
+        </form>
+      </div>
+      <div class="col-6">this is where we put in options for starting bar</div>
+    </div>
+    <div class="row">
+      <div class="col">maps go here</div>
+    </div>
+    <div class="row">
+      <div class="col-6">bar list</div>
       <div class="col-6">invite section</div>
     </div>
   </div>
@@ -96,6 +122,8 @@ export default {
   computed: {
     searchResults() {
       return this.$store.state.searchResults;
+    }
+      this.newOuting = { title: "", date: "" };
     }
   }
 };
