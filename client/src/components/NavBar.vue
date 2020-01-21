@@ -61,6 +61,7 @@ export default {
         maximumAge: 3000,
         timeout: 5000
       },
+      }
       // wpid: navigator.geolocation.watchPosition(
       //   this.geo_success,
       //   this.geo_error,
