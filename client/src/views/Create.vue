@@ -123,8 +123,6 @@ export default {
     searchResults() {
       return this.$store.state.searchResults;
     }
-      this.newOuting = { title: "", date: "" };
-    }
   }
 };
 </script>
