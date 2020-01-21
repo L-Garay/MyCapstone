@@ -77,8 +77,15 @@ export default class OutingController {
         userId: req.body.authorId,
         outingId: data._id
       };
-      await _attendeeService.create(attendee);
-      return res.status(201).send(data);
+      let finalAttendee = await _attendeeService.create(attendee);
+      let updatedOuting = data;
+      updatedOuting.attendees.push(finalAttendee._id);
+      let finalOuting = await _outingService.edit(
+        updatedOuting._id,
+        req.session.uid,
+        updatedOuting
+      );
+      return res.status(201).send(finalOuting);
     } catch (error) {
       next(error);
     }
