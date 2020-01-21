@@ -8,7 +8,7 @@ const Outing = new Schema(
     name: { type: String, required: true },
     date: { type: Date, required: true },
     startingPoint: { type: String },
-    bars: { type: Array },
+    barsList: { type: Array },
     attendees: { type: Array },
     active: { type: Boolean }
   },
