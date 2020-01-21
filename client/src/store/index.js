@@ -60,6 +60,9 @@ export default new Vuex.Store({
     },
     updateLocation(state, attendee) {
       state.activeAttendee = attendee;
+    },
+    setBars(state, payload) {
+      state.bars = payload;
     }
   },
   actions: {
@@ -196,6 +199,10 @@ export default new Vuex.Store({
       commit("updateLocation", updatedAttendee);
       let res = await api.put("attendee/" + this.state.activeAttendee._id);
       console.log(res);
+    },
+    async deleteBar({ commit, dispatch }, bar) {
+      await api.put("outing/" + bar.outingId + "/bars/" + bar.id);
+      commit("getBars", bar);
     }
     //#endregion
   },
