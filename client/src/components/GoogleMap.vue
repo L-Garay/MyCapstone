@@ -53,9 +53,9 @@ export default {
         let  contentString = '<div id="content">'+
           '<div id="siteNotice">'+
           '</div>'+
-          '<h1 id="firstHeading" class="firstHeading">' +
+          '<h4 id="firstHeading" class="firstHeading">' +
           bar.name +
-          '</h1>'+
+          '</h4>'+
           '<div id="bodyContent">'+
           '<p><b>Overall Rating:</b>' +
           bar.rating +
