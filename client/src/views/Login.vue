@@ -1,19 +1,19 @@
 <template>
-  <div class="login container-fluid">
+  <div id="login-background" class="login container-fluid">
     <div class="row">
-      <div class="col-12">
-        <img src="../assets/BarHopLogo.png" alt />
+      <div class="col-12 justify-content-center d-flex">
+        <img id="logo" src="../assets/BarHopLogo.png" alt />
       </div>
     </div>
     <div class="row">
       <div class="col-6 offset-3 d-flex justify-content-center">
         <form class="d-flex flex-column flex-sm-row" v-if="loginForm" @submit.prevent="loginUser">
-          <input class="login-input" type="email" v-model="creds.email" placeholder="EMAIL" />
+          <input class="login-input" type="email" v-model="creds.email" placeholder="Email..." />
           <input
             class="login-input"
             type="password"
             v-model="creds.password"
-            placeholder="PASSWORD"
+            placeholder="Password..."
           />
           <button class="btn login-btn" type="submit">Login</button>
         </form>
@@ -56,10 +56,8 @@
       </div>
     </div>
     <div class="row">
-      <div class="col">
-        <h1>About BarHop</h1>
-        <p>this is where we can describe everything about wtf our application is</p>
-        <p>and this is where we can put an optional demo video</p>
+      <div id="login-about" class="col">
+        <p>About</p>
       </div>
     </div>
   </div>
@@ -108,3 +106,26 @@ export default {
   }
 };
 </script>
+<style>
+#login-about{
+  color: rgb(104, 102, 102);
+  position: absolute;
+  bottom: 0;
+}
+#login-background{
+  background-image: url("http://www.hntinfo.eu/sites/hntinfo.eu/files/home-illustrative.jpg");
+  background-size: cover;
+  height: 110vh;
+  width: inherit;
+}
+#logo{
+  margin-top: 80px;
+  margin-bottom: 80px
+}
+input {
+  border: 2px solid grey;
+  border-radius: 6px;
+  background-color: rgb(235, 230, 230);
+  margin-bottom: 6px;
+}
+</style>
