@@ -49,7 +49,7 @@ export default new Vuex.Store({
     },
     setSearchResults(state, searchResults) {
       state.searchResults = searchResults;
-      console.log("storeee", this.state.searchResults);
+      console.log("storeee", searchResults);
     },
     setActiveOuting(state, outing) {
       state.activeOuting = outing;

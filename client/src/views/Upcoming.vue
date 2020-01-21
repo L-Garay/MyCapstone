@@ -40,6 +40,11 @@
         </button>
       </form>
     </modal>
+    <div>
+      <ul>
+        <li>{{ outing.barsList }}</li>
+      </ul>
+    </div>
   </div>
 </template>
 
