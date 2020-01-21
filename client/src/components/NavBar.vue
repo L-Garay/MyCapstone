@@ -67,8 +67,7 @@ export default {
       //   this.geo_error,
       //   this.geo_options
       // )
-    };
-  },
+    },
   mounted() {
     // this.$store.dispatch("getActiveOuting", this.$route.params.id);
     // this.$store.dispatch("getActiveAttendee");
