@@ -57,11 +57,11 @@ export default {
           bar.name +
           '</h1>'+
           '<div id="bodyContent">'+
-          '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-          'Heritage Site.</p>'+
-          '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-          'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-          '(last visited June 22, 2009).</p>'+
+          '<p><b>Overall Rating:</b>' +
+          bar.rating +
+          '</p><p><b>Price Level:</b>' +
+          bar.price_level +
+          '</p>'+
           '</div>'+
           '</div>';
         let infowindow = new google.maps.InfoWindow({
