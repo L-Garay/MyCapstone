@@ -32,30 +32,54 @@ export default {
         await navigator.geolocation.getCurrentPosition((position)=>{
         this.$store.dispatch("getBarsFromGoogle", {lat: position.coords.latitude, lng: position.coords.longitude});
         
-        this.addMarkers();
+        this.addMarkers(position);
       }, (e)=>{
         console.error(e)
       })
   },
-    addMarkers(){
+    addMarkers(position){
       let results = this.$store.state.searchResults;
+      console.log("position", position)
       let googleMap = new google.maps.Map(
         document.getElementById("googleMap"),
         {
-          center: {lat: 43.5948973, lng: -116.2803016},
-          zoom: 15
+          center: {lat: position.coords.latitude, lng: position.coords.longitude},
+          zoom: 10
         }
       );
-      console.log("results from store for search",results);
-      
       for (let index = 0; index < results.length; index++) {
-        const element = results[index];
+        const bar = results[index];
+        let  contentString = '<div id="content">'+
+          '<div id="siteNotice">'+
+          '</div>'+
+          '<h1 id="firstHeading" class="firstHeading">' +
+          bar.name +
+          '</h1>'+
+          '<div id="bodyContent">'+
+          '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+          'Heritage Site.</p>'+
+          '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
+          'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+          '(last visited June 22, 2009).</p>'+
+          '</div>'+
+          '</div>';
+        let infowindow = new google.maps.InfoWindow({
+            content: contentString
+          });
+      console.log("results from store for search", bar.name);
+      
         let marker = new google.maps.Marker({
-          position: {lat: element.geometry.location.lat, lng: element.geometry.location.lng},
+          position: {lat: bar.geometry.location.lat, lng: bar.geometry.location.lng},
           map: googleMap,
-          title: element.name
-        })
+        });
+        
+        marker.addListener('click', function() {
+          infowindow.open(googleMap, marker);
+        });
+              
+
       }},
+      
   }
 };
 </script>
