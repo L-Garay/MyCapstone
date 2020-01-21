@@ -14,6 +14,7 @@ export default {
   name: "GoogleMap",
   props: ["lat", "lng"],
   async mounted() {
+    this.findLocation();
     this.initMap();
   },
   methods: {
@@ -44,7 +45,7 @@ export default {
         document.getElementById("googleMap"),
         {
           center: {lat: position.coords.latitude, lng: position.coords.longitude},
-          zoom: 10
+          zoom: 14
         }
       );
       for (let index = 0; index < results.length; index++) {
