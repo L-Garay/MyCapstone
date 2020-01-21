@@ -1,19 +1,14 @@
 <template>
   <div class="container-fluid">
-      <navbar />
+    <navbar />
     <div class="row">
       <GoogleMap />
     </div>
     <div class="row">
       <form class="form-group" @submit.prevent="createOuting">
         <label for="name">Title:</label>
-        <input
-          class="form-control"
-          for="name"
-          v-model="newOuting.name"
-          id="name"
-          type="text"
-        />
+        <input class="form-control" for="name" v-model="newOuting.name" id="name" type="text" />
+
         <label for="datetime-local">When:</label>
         <input
           class="form-control"
@@ -30,9 +25,23 @@
       </form>
     </div>
     <div class="row">
-      <div class="col-6">this is where we put in options for starting bar</div>
-      <div class="col">other bar list here</div>
-      <div class="col-6">invite section</div>
+      <div class="col-6">
+        <ul class="overflow">
+          <li v-for="searchResult in searchResults" :key="searchResult.id">
+            {{searchResult.name}}
+            <button class="btn-success" @click.prevent="addBar(searchResult)">+</button>
+          </li>
+        </ul>
+      </div>
+      <div class="col-6">
+        Bar List
+        <ul class="overflow">
+          <li v-for="(bar, index) in this.newOuting.barsList" :key="bar.id">
+            {{bar.name}}
+            <button @click.prevent="deleteBar(index)" class="btn-danger">-</button>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -74,6 +83,14 @@ export default {
       } catch (error) {
         next(error);
       }
+    },
+    async deleteBar(index) {
+      console.log("deleted Bar", index);
+      try {
+        this.newOuting.barsList.splice(index, 1);
+      } catch (error) {
+        next(error);
+      }
     }
   },
   computed: {
@@ -84,4 +101,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.overflow {
+  height: 30vh;
+  overflow-y: scroll;
+}
+</style>
