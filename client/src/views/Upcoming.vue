@@ -10,7 +10,11 @@
             style="color:red"
             class="fas fa-trash"
           ></i>
-          <i @click.prevent="showEditOutingModal" style="color:green" class="fas fa-edit"></i>
+          <i
+            @click.prevent="showEditOutingModal"
+            style="color:green"
+            class="fas fa-edit"
+          ></i>
         </h1>
         <h1>{{ outing.date | formatDate }}</h1>
       </div>
@@ -18,7 +22,12 @@
     <modal name="editOutingModal">
       <form class="form" @submit.prevent="editOuting">
         <div class="form-group">
-          <input type="text" name="name" v-model="newOuting.name" placeholder="Change name" />
+          <input
+            type="text"
+            name="name"
+            v-model="newOuting.name"
+            placeholder="Change name"
+          />
           <label for="datetime-local">When:</label>
           <input
             class="form-control"
@@ -27,18 +36,19 @@
             value="2020-01-01T12:00:00"
           />
         </div>
-        <button @click="hideEditOuting" class="btn" type="submit">Submit Changes</button>
+        <button @click="hideEditOuting" class="btn" type="submit">
+          Submit Changes
+        </button>
       </form>
     </modal>
     <div>
       <ol>
         BARS
         <li v-for="bar in outing.barsList" :key="bar.id">
-          {{ bar.name }} , {{bar.formatted_address}}
-          <button
-            class="btn btn-danger"
-            @click.prevent="deleteBar(bar)"
-          >-</button>
+          {{ bar.name }} , {{ bar.formatted_address }}
+          <button class="btn btn-danger" @click.prevent="deleteBar(index)">
+            -
+          </button>
         </li>
       </ol>
     </div>
@@ -95,6 +105,11 @@ export default {
     },
     hideEditOuting() {
       this.$modal.hide("editOutingModal");
+    },
+    async deleteBar(index) {
+      console.log("deleted Bar", index);
+      this.outing.barsList.splice(index, 1);
+      this.$store.dispatch("editOuting", this.outing);
     }
   }
 };
