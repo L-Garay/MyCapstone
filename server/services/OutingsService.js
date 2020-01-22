@@ -67,8 +67,6 @@ class OutingService {
     let outings = await _repository.find();
     let activeOutings = outings.filter(o => {
       let outingDate = new Date(o.date);
-      console.log(outingDate);
-
       return (
         outingDate.getDate() == date &&
         outingDate.getMonth() == month &&

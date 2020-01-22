@@ -6,6 +6,7 @@ const Attendee = new Schema(
   {
     userId: { type: ObjectId, required: true },
     outingId: { type: ObjectId, required: true },
+    name: { type: String },
     drinks: { type: Array },
     status: { type: Number, default: 0 },
     goneHome: { type: Boolean, default: false },

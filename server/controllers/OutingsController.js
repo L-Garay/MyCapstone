@@ -3,6 +3,7 @@ import { Authorize } from "../middleware/authorize.js";
 import _outingService from "../services/OutingsService";
 import _drinkService from "../services/DrinksService";
 import _attendeeService from "../services/AttendeeService";
+import _profileService from "../services/ProfileService";
 
 //PUBLIC
 export default class OutingController {
@@ -73,9 +74,11 @@ export default class OutingController {
     try {
       req.body.authorId = req.session.uid;
       let data = await _outingService.create(req.body);
+      let profileSearch = await _profileService.getByUserId(req.body.authorId);
       let attendee = {
         userId: req.body.authorId,
-        outingId: data._id
+        outingId: data._id,
+        name: profileSearch.name
       };
       let finalAttendee = await _attendeeService.create(attendee);
       let updatedOuting = data;
