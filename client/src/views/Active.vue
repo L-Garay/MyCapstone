@@ -1,7 +1,7 @@
 <template>
   <div>
     <navbar />
-    <h3></h3>
+    <h3>{{activeOuting.name}}</h3>
   </div>
 </template>
 
@@ -12,8 +12,10 @@ export default {
     Navbar
   },
   computed: {
-    activeOutings() {
-      return this.$store.state.activeOutings;
+    activeOuting() {
+      return this.$store.state.activeOutings.find(
+        o => o._id == this.$route.params.id || { title: "Loading..." }
+      );
     }
   }
 };
