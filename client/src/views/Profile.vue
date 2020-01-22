@@ -1,8 +1,7 @@
 <template>
   <div class="container-fluid" id="background-image">
-      <navbar />
-    <div class="row">
-    </div>
+    <navbar />
+    <div class="row"></div>
     <div class="row">
       <div class="col-6">
         <img
@@ -13,56 +12,32 @@
         <h5 style="color:white">Friends( )</h5>
         <h5 style="color:white">Invites( )</h5>
       </div>
-      <div class="col-6">
-        <h5 style="color:white">Name:{{ profile.name }}</h5>
-        <h5 style="color:white">Age:{{ profile.age }}</h5>
-        <h5 style="color:white">Address:{{ profile.address }}</h5>
-        <h5 style="color:white">Phone:{{ profile.phone }}</h5>
-        <h5 style="color:white">Take Me Home:{{ profile.tmh }}</h5>
-        <div>
-          <button class="btn btn-primary" type="button" @click="showForm">
-            Edit Profile
-          </button>
+      <div class="col-6 profileInfo">
+        <h5 style="color:white">Name: {{ profile.name }}</h5>
+        <h5 style="color:white">Age: {{ profile.age }}</h5>
+        <h5 style="color:white">Address: {{ profile.address }}</h5>
+        <h5 style="color:white">Phone: {{ profile.phone }}</h5>
+        <h5 style="color:white">Take Me Home: {{ profile.tmh }}</h5>
+        <div class="d-flex justify-content-center">
+          <button class="btn editBtn" type="button" @click="showForm">Edit Profile</button>
         </div>
       </div>
       <div>
         <modal name="profileModal">
           <form class="form" @submit.prevent="editProfile">
             <div class="form-group">
-              <input
-                type="text"
-                name="name"
-                v-model="newProfile.name"
-                placeholder="Change name"
-              />
-              <input
-                type="text"
-                name="age"
-                v-model="newProfile.age"
-                placeholder="Change age"
-              />
+              <input type="text" name="name" v-model="newProfile.name" placeholder="Change name" />
+              <input type="text" name="age" v-model="newProfile.age" placeholder="Change age" />
               <input
                 type="text"
                 name="address"
                 v-model="newProfile.address"
                 placeholder="Change address"
               />
-              <input
-                type="text"
-                name="phone"
-                v-model="newProfile.phone"
-                placeholder="Change phone"
-              />
-              <input
-                type="text"
-                name="tmh"
-                v-model="newProfile.tmh"
-                placeholder="Change tmh"
-              />
+              <input type="text" name="phone" v-model="newProfile.phone" placeholder="Change phone" />
+              <input type="text" name="tmh" v-model="newProfile.tmh" placeholder="Change tmh" />
             </div>
-            <button @click="hideForm" class="btn" type="submit">
-              Submit Changes
-            </button>
+            <button @click="hideForm" class="btn formBtn" type="submit">Submit Changes</button>
           </form>
         </modal>
       </div>
@@ -137,12 +112,25 @@ export default {
 </script>
 
 <style>
+body {
+  height: 100vh;
+}
 #background-image {
   background-image: url("https://scottcoyneunderdev.files.wordpress.com/2015/02/dark-wood-high-quality-wallpaper-hd-resolution3.jpg");
+  height: 100vh;
 }
 #profile-picture {
   height: 10em;
   border-radius: 50%;
+}
+.profileInfo {
+  text-align: left;
+}
+.editBtn {
+  color: white;
+  border: 1px solid white;
+  background-color: rgb(255, 255, 255, 0.3);
+  padding: 2pt;
 }
 .listSection {
   height: 40vh;
@@ -152,23 +140,44 @@ export default {
   width: 200px;
 }
 .v--modal {
-  background-color: blanchedalmond !important;
+  background-image: url("https://media.giphy.com/media/XVTk9sKWuEa88/giphy.gif");
+  background-size: cover;
   width: 300px !important;
-  left: 15rem !important;
+  left: 38rem !important;
+  box-shadow: 0 4px 8px 0 rgba(209, 155, 7, 0.904),
+    0 6px 20px 0 rgb(192, 121, 14) !important;
+}
+div.v--modal-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.formBtn {
+  color: white;
+  border: 1pt solid white;
+  background-color: rgb(255, 255, 255, 0.3);
+}
+.formBtn:hover {
+  cursor: pointer;
 }
 @media only screen and (max-width: 455px) {
   body div div.v--modal {
-    background-color: grey !important;
+    background-image: url("https://media.giphy.com/media/XVTk9sKWuEa88/giphy.gif");
+    background-size: cover;
     width: 300px !important;
     left: 3.5rem !important;
+    box-shadow: 0 4px 8px 0 rgba(209, 155, 7, 0.904),
+      0 6px 20px 0 rgb(192, 121, 14);
   }
-}
-form {
-  display: flex;
-  flex-direction: column;
-}
-.modalBtn {
-  border: 1px solid black;
-  background-color: aqua;
+  div.v--modal-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .formBtn {
+    color: white;
+    border: 1pt solid white;
+    background-color: rgb(255, 255, 255, 0.3);
+  }
 }
 </style>
