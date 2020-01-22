@@ -17,8 +17,6 @@ export default class ActiveOutingController {
   }
   async getActiveOutings(req, res, next) {
     try {
-      console.log("Made it to get Active Outings");
-
       let data = await _outingService.getActiveOutings();
       return res.send(data);
     } catch (error) {

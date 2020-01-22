@@ -63,11 +63,8 @@ class OutingService {
     let date = new Date().getDate();
     let month = new Date().getMonth();
     let year = new Date().getUTCFullYear();
-    console.log(date, month, year);
 
     let outings = await _repository.find();
-    console.log("Here is your find function results", outings);
-
     let activeOutings = outings.filter(o => {
       let outingDate = new Date(o.date);
       console.log(outingDate);
@@ -78,7 +75,6 @@ class OutingService {
         outingDate.getUTCFullYear() == year
       );
     });
-    console.log("Look here", activeOutings);
 
     if (activeOutings) {
       activeOutings.forEach(o => {
