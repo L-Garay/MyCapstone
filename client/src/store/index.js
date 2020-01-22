@@ -30,7 +30,7 @@ export default new Vuex.Store({
     drinks: [],
     comments: [],
     photos: [],
-    activeAttendee: {}
+    outingAttendees: {}
   },
   mutations: {
     setUser(state, user) {
@@ -52,12 +52,12 @@ export default new Vuex.Store({
       state.searchResults = searchResults;
       console.log("storeee", searchResults);
     },
-    setActiveAttendee(state, attendee) {
-      state.activeAttendee = attendee;
+    setOutingAttendees(state, attendees) {
+      state.outingAttendees = attendees;
     },
-    updateLocation(state, attendee) {
-      state.activeAttendee = attendee;
-    },
+    // updateLocation(state, attendee) {
+    //   state.activeAttendee = attendee;
+    // },
     setActiveOutings(state, activeOutings) {
       state.activeOutings = activeOutings;
     },
@@ -176,22 +176,20 @@ export default new Vuex.Store({
       let searchResults = res.data.results;
       commit("setSearchResults", searchResults);
     },
-    async getActiveAttendee({ commit, dispatch }) {
-      let res = await api.get(
-        "outing/" + this.state.activeOuting._id + "/user"
-      );
-      console.log("ActiveAttendee", res);
+    async getOutingAttendees({ commit, dispatch }, outingId) {
+      let res = await api.get("outing/" + outingId + "/attendees");
+      console.log("OutingAttendees", res.data);
 
-      commit("setActiveAttendee", res);
+      commit("setOutingAttendees", res.data);
     },
-    async updateAttendeeLocation({ commit, dispatch }, position) {
-      console.log(position);
-      let updatedAttendee = this.state.activeAttendee;
-      updatedAttendee.location = position;
-      commit("updateLocation", updatedAttendee);
-      let res = await api.put("attendee/" + this.state.activeAttendee._id);
-      console.log(res);
-    },
+    // async updateAttendeeLocation({ commit, dispatch }, position) {
+    //   console.log(position);
+    //   let updatedAttendee = this.state.activeAttendee;
+    //   updatedAttendee.location = position;
+    //   commit("updateLocation", updatedAttendee);
+    //   let res = await api.put("attendee/" + this.state.activeAttendee._id);
+    //   console.log(res);
+    // },
 
     //#endregion
     //#region -- ActiveOuting STUFF --
