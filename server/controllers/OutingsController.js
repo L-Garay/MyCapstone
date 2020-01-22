@@ -15,6 +15,7 @@ export default class OutingController {
       .get("/:id/user", this.getActiveAttendee)
       .get("/:id/drinks", this.getOutingDrinks)
       .get("/:id/attendees", this.getOutingAttendees)
+      // .get("/active", this.getActiveOutings)
       .post("", this.create)
       .put("/:id", this.edit)
       .delete("/:id", this.delete)
@@ -27,8 +28,8 @@ export default class OutingController {
 
   async getAllOutings(req, res, next) {
     try {
-      // let active = await _outingService.setActiveOutings();
-      // console.log("The active outings", active);
+      let active = await _outingService.setActiveOutings();
+      console.log("The active outings", active);
 
       let data = await _outingService.getAllOutings();
       return res.send(data);
@@ -36,6 +37,17 @@ export default class OutingController {
       next(error);
     }
   }
+
+  // async getActiveOutings(req, res, next) {
+  //   try {
+  //     console.log("Made it to get Active Outings");
+
+  //     let data = await _outingService.getActiveOutings();
+  //     return res.send(data);
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // }
 
   async getActiveAttendee(req, res, next) {
     try {

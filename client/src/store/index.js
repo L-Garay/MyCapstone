@@ -187,11 +187,16 @@ export default new Vuex.Store({
       commit("updateLocation", updatedAttendee);
       let res = await api.put("attendee/" + this.state.activeAttendee._id);
       console.log(res);
-    }
+    },
 
     //#endregion
     //#region -- ActiveOuting STUFF --
+    async getActiveOutings({ commit, dispatch }) {
+      let res = await api.get("active");
+      console.log("ActiveOutings", res);
 
+      commit("setActiveOutings", res.data);
+    }
     //#endregion
   },
   modules: {}

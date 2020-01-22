@@ -12,6 +12,17 @@ class OutingService {
     }
     return data;
   }
+
+  async getActiveOutings() {
+    let data = await _repository.find();
+    let fdata = data.filter(ao => {
+      return ao.active == true;
+    });
+    if (!data) {
+      throw new ApiError("Invalid User Id", 400);
+    }
+    return fdata;
+  }
   async getById(userId, authId) {
     let data = await _repository.findOne({ authorId: userId });
     if (!data) {
@@ -48,34 +59,37 @@ class OutingService {
       throw new ApiError("Invalid User Id", 400);
     }
   }
-  // async setActiveOutings() {
-  //   let date = new Date().getDate();
-  //   let month = new Date().getMonth();
-  //   let year = new Date().getUTCFullYear();
-  //   console.log(date, month, year);
+  async setActiveOutings() {
+    let date = new Date().getDate();
+    let month = new Date().getMonth();
+    let year = new Date().getUTCFullYear();
+    console.log(date, month, year);
 
-  //   let outings = await _repository.find();
-  //   console.log("Here is your find function results", outings);
+    let outings = await _repository.find();
+    console.log("Here is your find function results", outings);
 
-  //   let activeOutings = outings.filter(o => {
-  //     let outingDate = new Date(o.date);
-  //     console.log(outingDate);
-  //     outingDate.getDate() == date &&
-  //       outingDate.getMonth() == month &&
-  //       outingDate.getUTCFullYear() == year;
-  //   });
-  //   console.log("Look here", activeOutings);
+    let activeOutings = outings.filter(o => {
+      let outingDate = new Date(o.date);
+      console.log(outingDate);
 
-  //   if (activeOutings) {
-  //     activeOutings.forEach(o => {
-  //       {
-  //         o.active = true;
-  //       }
-  //       this.edit(o._id, o.authorId, o);
-  //     });
-  //   }
-  //   return activeOutings;
-  // }
+      return (
+        outingDate.getDate() == date &&
+        outingDate.getMonth() == month &&
+        outingDate.getUTCFullYear() == year
+      );
+    });
+    console.log("Look here", activeOutings);
+
+    if (activeOutings) {
+      activeOutings.forEach(o => {
+        {
+          o.active = true;
+        }
+        this.edit(o._id, o.authorId, o);
+      });
+    }
+    return activeOutings;
+  }
 }
 
 const _outingService = new OutingService();

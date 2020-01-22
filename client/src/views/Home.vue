@@ -4,32 +4,16 @@
     <div class="row"></div>
     <div class="row">
       <div class="col">
-        <div
-          id="carouselExampleControls"
-          class="carousel slide"
-          data-ride="carousel"
-        >
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img
-                src="../assets/bar1.jpg"
-                class="d-block w-100 carouselImgs"
-                alt="..."
-              />
+              <img src="../assets/bar1.jpg" class="d-block w-100 carouselImgs" alt="..." />
             </div>
             <div class="carousel-item">
-              <img
-                src="../assets/bar2.jpg"
-                class="d-block w-100 carouselImgs"
-                alt="..."
-              />
+              <img src="../assets/bar2.jpg" class="d-block w-100 carouselImgs" alt="..." />
             </div>
             <div class="carousel-item">
-              <img
-                src="../assets/bar3.jpg"
-                class="d-block w-100 carouselImgs"
-                alt="..."
-              />
+              <img src="../assets/bar3.jpg" class="d-block w-100 carouselImgs" alt="..." />
             </div>
           </div>
           <a
@@ -58,9 +42,7 @@
         <h1>Past</h1>
         <ol class="overflow">
           <li v-for="outing in pastOutings" :key="outing._id">
-            <router-link
-              :to="{ name: 'past', params: { outingId: outing._id } }"
-            >
+            <router-link :to="{ name: 'past', params: { outingId: outing._id } }">
               <b>{{ outing.name }}</b>
               <p>{{ outing.date | formatPastDate }}</p>
             </router-link>
@@ -71,9 +53,7 @@
         <h1>Active</h1>
         <ol>
           <li v-for="outing in activeOutings" :key="outing._id">
-            <router-link :to="{ name: 'active', params: { id: outing._id } }">
-              {{ outing.name }}</router-link
-            >
+            <router-link :to="{ name: 'active', params: { id: outing._id } }">{{ outing.name }}</router-link>
           </li>
         </ol>
         <img
@@ -115,6 +95,7 @@ export default {
   mounted() {
     this.$store.dispatch("getProfileByUserId", this.$store.state.user._id);
     this.$store.dispatch("getAllOutings");
+    this.$store.dispatch("getActiveOutings");
   },
   computed: {
     upcommingOutings() {
@@ -145,22 +126,14 @@ export default {
           }
         });
     },
-    activeOutings() {
-      let date = new Date().getDate();
-      let year = new Date().getUTCFullYear();
-      let activeOutings = this.$store.state.outings.filter(
-        o =>
-          new Date(o.date).getDate() == date &&
-          new Date(o.date).getUTCFullYear() == year
-      );
-      this.$store.dispatch("setActiveOutings", activeOutings);
-      return activeOutings;
-    },
     profile() {
       return this.$store.state.profile;
     },
     user() {
       return this.$store.state.user;
+    },
+    activeOutings() {
+      return this.$store.state.activeOutings;
     }
   }
 };
