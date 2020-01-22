@@ -48,6 +48,34 @@ class OutingService {
       throw new ApiError("Invalid User Id", 400);
     }
   }
+  // async setActiveOutings() {
+  //   let date = new Date().getDate();
+  //   let month = new Date().getMonth();
+  //   let year = new Date().getUTCFullYear();
+  //   console.log(date, month, year);
+
+  //   let outings = await _repository.find();
+  //   console.log("Here is your find function results", outings);
+
+  //   let activeOutings = outings.filter(o => {
+  //     let outingDate = new Date(o.date);
+  //     console.log(outingDate);
+  //     outingDate.getDate() == date &&
+  //       outingDate.getMonth() == month &&
+  //       outingDate.getUTCFullYear() == year;
+  //   });
+  //   console.log("Look here", activeOutings);
+
+  //   if (activeOutings) {
+  //     activeOutings.forEach(o => {
+  //       {
+  //         o.active = true;
+  //       }
+  //       this.edit(o._id, o.authorId, o);
+  //     });
+  //   }
+  //   return activeOutings;
+  // }
 }
 
 const _outingService = new OutingService();

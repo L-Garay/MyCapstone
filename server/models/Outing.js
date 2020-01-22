@@ -10,7 +10,8 @@ const Outing = new Schema(
     startingPoint: { type: String },
     barsList: { type: Array },
     attendees: { type: Array },
-    active: { type: Boolean }
+    active: { type: Boolean },
+    photos: { type: Array }
   },
   { timestamps: true, toJSON: { virtuals: true } }
 );

@@ -27,6 +27,9 @@ export default class OutingController {
 
   async getAllOutings(req, res, next) {
     try {
+      // let active = await _outingService.setActiveOutings();
+      // console.log("The active outings", active);
+
       let data = await _outingService.getAllOutings();
       return res.send(data);
     } catch (error) {
