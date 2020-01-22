@@ -57,9 +57,6 @@ export default new Vuex.Store({
     updateLocation(state, attendee) {
       state.activeAttendee = attendee;
     },
-    setBars(state, payload) {
-      state.bars = payload;
-    },
     setActiveOutings(state, activeOutings) {
       state.activeOutings = activeOutings;
     }
@@ -190,16 +187,10 @@ export default new Vuex.Store({
       commit("updateLocation", updatedAttendee);
       let res = await api.put("attendee/" + this.state.activeAttendee._id);
       console.log(res);
-    },
-    async deleteBar({ commit, dispatch }, bar) {
-      await api.put("outing/" + bar.outingId + "/bars/" + bar.id);
-      commit("getBars", bar);
-    },
+    }
+
     //#endregion
     //#region -- ActiveOuting STUFF --
-    setActiveOutings({ commit, dispatch }, activeOutings) {
-      commit("setActiveOutings", activeOutings);
-    }
 
     //#endregion
   },

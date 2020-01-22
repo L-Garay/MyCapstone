@@ -7,13 +7,7 @@
     <div class="row">
       <form class="form-group" @submit.prevent="createOuting">
         <label for="name">Title:</label>
-        <input
-          class="form-control"
-          for="name"
-          v-model="newOuting.name"
-          id="name"
-          type="text"
-        />
+        <input class="form-control" for="name" v-model="newOuting.name" id="name" type="text" />
 
         <label for="datetime-local">When:</label>
         <input
@@ -35,9 +29,10 @@
         <ul class="overflow">
           <li v-for="searchResult in searchResults" :key="searchResult.id">
             {{ searchResult.name }}
-            <button class="btn-success" @click.prevent="addBar(searchResult)">
-              +
-            </button>
+            <button
+              class="btn-success"
+              @click.prevent="addBar(searchResult)"
+            >+</button>
           </li>
         </ul>
       </div>
@@ -46,9 +41,7 @@
         <ul class="overflow">
           <li v-for="(bar, index) in this.newOuting.barsList" :key="bar.id">
             {{ bar.name }}
-            <button @click.prevent="deleteBar(index)" class="btn-danger">
-              -
-            </button>
+            <button @click.prevent="deleteBar(index)" class="btn-danger">-</button>
           </li>
         </ul>
       </div>
