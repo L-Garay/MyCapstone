@@ -22,7 +22,7 @@ export default new Vuex.Store({
     user: {},
     profile: {},
     outings: [],
-    activeOuting: {},
+    activeOutings: [],
     searchResults: [],
     bars: [],
     friends: [],
@@ -51,10 +51,6 @@ export default new Vuex.Store({
       state.searchResults = searchResults;
       console.log("storeee", searchResults);
     },
-    setActiveOuting(state, outing) {
-      state.activeOuting = outing;
-      console.log("settingActiveOuting", outing);
-    },
     setActiveAttendee(state, attendee) {
       state.activeAttendee = attendee;
     },
@@ -63,6 +59,9 @@ export default new Vuex.Store({
     },
     setBars(state, payload) {
       state.bars = payload;
+    },
+    setActiveOutings(state, activeOutings) {
+      state.activeOutings = activeOutings;
     }
   },
   actions: {
@@ -176,14 +175,6 @@ export default new Vuex.Store({
       let searchResults = res.data.results;
       commit("setSearchResults", searchResults);
     },
-    async getActiveOuting({ commit, dispatch }, userId) {
-      console.log("This is the User Id", userId);
-
-      let res = await api.get("outing/" + userId);
-      console.log("GotactiveOuting", res.data);
-      commit("setActiveOuting", res.data);
-      //dispatch("getActiveAttendee");
-    },
     async getActiveAttendee({ commit, dispatch }) {
       let res = await api.get(
         "outing/" + this.state.activeOuting._id + "/user"
@@ -203,7 +194,13 @@ export default new Vuex.Store({
     async deleteBar({ commit, dispatch }, bar) {
       await api.put("outing/" + bar.outingId + "/bars/" + bar.id);
       commit("getBars", bar);
+    },
+    //#endregion
+    //#region -- ActiveOuting STUFF --
+    setActiveOutings({ commit, dispatch }, activeOutings) {
+      commit("setActiveOutings", activeOutings);
     }
+
     //#endregion
   },
   modules: {}

@@ -4,16 +4,32 @@
     <div class="row"></div>
     <div class="row">
       <div class="col">
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div
+          id="carouselExampleControls"
+          class="carousel slide"
+          data-ride="carousel"
+        >
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="../assets/bar1.jpg" class="d-block w-100 carouselImgs" alt="..." />
+              <img
+                src="../assets/bar1.jpg"
+                class="d-block w-100 carouselImgs"
+                alt="..."
+              />
             </div>
             <div class="carousel-item">
-              <img src="../assets/bar2.jpg" class="d-block w-100 carouselImgs" alt="..." />
+              <img
+                src="../assets/bar2.jpg"
+                class="d-block w-100 carouselImgs"
+                alt="..."
+              />
             </div>
             <div class="carousel-item">
-              <img src="../assets/bar3.jpg" class="d-block w-100 carouselImgs" alt="..." />
+              <img
+                src="../assets/bar3.jpg"
+                class="d-block w-100 carouselImgs"
+                alt="..."
+              />
             </div>
           </div>
           <a
@@ -42,7 +58,9 @@
         <h1>Past</h1>
         <ol class="overflow">
           <li v-for="outing in pastOutings" :key="outing._id">
-            <router-link :to="{ name: 'past', params: { outingId: outing._id } }">
+            <router-link
+              :to="{ name: 'past', params: { outingId: outing._id } }"
+            >
               <b>{{ outing.name }}</b>
               <p>{{ outing.date | formatPastDate }}</p>
             </router-link>
@@ -52,10 +70,14 @@
       <div class="col-4">
         <h1>Active</h1>
         <ol>
-          <li>outing title</li>
+          <li v-for="outing in activeOutings" :key="outing._id">
+            <router-link :to="{ name: 'active', params: { id: outing._id } }">
+              {{ outing.name }}</router-link
+            >
+          </li>
         </ol>
         <img
-          id="status-picture"
+          class="picture"
           src="https://www.pinclipart.com/picdir/middle/211-2118971_happy-face-chalk-png-hope-you-enjoy-my.png"
           alt
         />
@@ -92,7 +114,6 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getProfileByUserId", this.$store.state.user._id);
-
     this.$store.dispatch("getAllOutings");
   },
   computed: {
@@ -124,12 +145,17 @@ export default {
           }
         });
     },
-    // activeOuting() {
-    //   let date = new Date();
-    //   return this.$store.state.outings.find(
-    //     this.$store.state.outings.date == date
-    //   );
-    // },
+    activeOutings() {
+      let date = new Date().getDate();
+      let year = new Date().getUTCFullYear();
+      let activeOutings = this.$store.state.outings.filter(
+        o =>
+          new Date(o.date).getDate() == date &&
+          new Date(o.date).getUTCFullYear() == year
+      );
+      this.$store.dispatch("setActiveOutings", activeOutings);
+      return activeOutings;
+    },
     profile() {
       return this.$store.state.profile;
     },
@@ -140,12 +166,10 @@ export default {
 };
 </script>
 <style>
-#status-picture {
-  height: 7em;
+.picture {
+  height: 100px;
+  width: 100px;
   border-radius: 50%;
-}
-li p {
-  font-size: 0.75rem;
 }
 li p {
   font-size: 0.75rem;
