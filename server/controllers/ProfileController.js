@@ -31,8 +31,6 @@ export default class ProfileController {
   async create(req, res, next) {
     try {
       req.body.userId = req.session.uid;
-      console.log("from create profile in server", req.body);
-
       let data = await _profileService.create(req.body);
       return res.status(201).send(data);
     } catch (error) {
