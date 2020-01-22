@@ -22,7 +22,7 @@ export default {
     return {};
   },
   mounted() {
-    activeOuting();
+    this.$store.dispatch("getActiveOuting", this.$route.params.id);
   },
   components: {
     Navbar,
@@ -30,9 +30,7 @@ export default {
   },
   computed: {
     activeOuting() {
-      return this.$store.state.activeOutings.find(
-        o => o._id == this.$route.params.id || { title: "Loading..." }
-      );
+      return this.$store.state.activeOuting || { title: "Loading..." };
     }
   }
 };

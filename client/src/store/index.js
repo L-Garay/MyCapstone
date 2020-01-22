@@ -23,6 +23,7 @@ export default new Vuex.Store({
     profile: {},
     outings: [],
     activeOutings: [],
+    activeOuting: {},
     searchResults: [],
     bars: [],
     friends: [],
@@ -59,6 +60,9 @@ export default new Vuex.Store({
     },
     setActiveOutings(state, activeOutings) {
       state.activeOutings = activeOutings;
+    },
+    setActiveOuting(state, activeOuting) {
+      state.activeOuting = activeOuting;
     }
   },
   actions: {
@@ -193,9 +197,11 @@ export default new Vuex.Store({
     //#region -- ActiveOuting STUFF --
     async getActiveOutings({ commit, dispatch }) {
       let res = await api.get("active");
-      console.log("ActiveOutings", res);
-
       commit("setActiveOutings", res.data);
+    },
+    async getActiveOuting({ commit, dispatch }, outingId) {
+      let res = await api.get("outing/" + outingId);
+      commit("setActiveOuting", res.data);
     }
     //#endregion
   },
