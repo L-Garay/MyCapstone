@@ -95,10 +95,6 @@ export default {
     },
     hideEditOuting() {
       this.$modal.hide("editOutingModal");
-    },
-    async deleteBar(bar) {
-      console.log("deleted Bar", bar);
-      this.$store.dispatch("deleteBar", bar);
     }
   }
 };
