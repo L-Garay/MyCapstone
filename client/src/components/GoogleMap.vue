@@ -29,11 +29,11 @@ export default {
     },
     async findLocation() {
       await navigator.geolocation.getCurrentPosition(
-        position => {
+        async position => {
           console.log(this.$route);
 
           if (this.$route.path == "/create") {
-            this.$store.dispatch("getBarsFromGoogle", {
+            await this.$store.dispatch("getBarsFromGoogle", {
               //TODO make this async somehow
               lat: position.coords.latitude,
               lng: position.coords.longitude
@@ -53,8 +53,11 @@ export default {
       } else {
         await this.$store.dispatch("getActiveOuting", this.$route.params.id);
         results = this.$store.state.activeOuting.barsList;
+        await this.$store.dispatch("getActiveDrinks", this.$route.params.id);
+        drinks = this.$store.state.activeDrinks;
       }
       console.log("This is your", this.$store.state.searchResults);
+      console.log("Active Drinks are:", this.drinks);
       let sumLat = 0;
       let sumLng = 0;
       for (let index = 0; index < results.length; index++) {
@@ -111,6 +114,35 @@ export default {
         marker.addListener("click", function() {
           infowindow.open(googleMap, marker);
         });
+      }
+      if (drinks) {
+        for (let index = 0; index < drinks.length; index++) {
+          const drink = drinks[index];
+          let contentString =
+            '<div id="content">' +
+            '<div id="siteNotice">' +
+            "</div>" +
+            '<h4 id="firstHeading" class="firstHeading">' +
+            drink.description +
+            "</h4>" +
+            "</div>";
+          let infowindow = new google.maps.InfoWindow({
+            content: contentString
+          });
+          console.log("Drink markers to be drawn:", drink.name);
+
+          let marker = new google.maps.Marker({
+            position: {
+              lat: drink.location.geometry.location.lat,
+              lng: drink.location.geometry.location.lng
+            },
+            map: googleMap
+          });
+
+          marker.addListener("click", function() {
+            infowindow.open(googleMap, marker);
+          });
+        }
       }
     }
   }
