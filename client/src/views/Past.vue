@@ -81,6 +81,7 @@
       </div>
     </div>
     <div class="row">
+      <photoupload />
       <div class="col-12">
         <p>this area is for comments</p>
       </div>
@@ -91,6 +92,7 @@
 <script>
 import Navbar from "@/components/NavBar.vue";
 import GoogleMap from "@/components/GoogleMap.vue";
+import photoupload from "@/components/photoUpload.vue";
 export default {
   data: {
     myCroppa: null,
@@ -98,7 +100,9 @@ export default {
   },
   components: {
     Navbar,
-    GoogleMap
+    GoogleMap,
+    photoupload
+
   },
   computed: {
     outing() {

@@ -18,26 +18,29 @@ export default {
     },
     methods: {
         onFileSelected(event){
-            this.photoFile = event.target.files;
+            let photoFile = event.target.files;
             const fileReader = new FileReader();
             fileReader.addEventListener('load', () =>{
                 this.imageUrl = fileReader.result;
             })
             fileReader.readAsDataURL(photoFile[0])
+            console.log("this is the image", this.imageUrl);
             this.image = photoFile[0];
         },
         onUpload(){
             let outing =this.$store.state.outings.find(o => o._id == this.$route.params.outingId);
-            let photo = this.photoFile[0]
-            debugger
+            outing.photos.push(this.imageUrl);
+            this.$store.dispatch("editOuting", outing);
+            console.log("upload outing object", outing);
+            console.log("upload img url",this.imageUrl);
+            
+            // let photo = this.photoFile
             // {
             //     name: this.image.name,
             //     outingId: outing._id,
             //     url: this.photoFile
             // };
-            outing.photos.push(photo);
-            console.log("outing", outing.photos);
-            // this.$store.dispatch("editOuting", outing);
+            // console.log("outing", outing.photos);
         }
             // this.$store.dispatch("editOuting", editedOuting);
             // console.log("image url", this.image);
