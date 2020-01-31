@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Drink from "../models/Outing";
+import Drink from "../models/Drink";
 import ApiError from "../utils/ApiError";
 import _attendee from "../services/AttendeeService";
 import Attendee from "../models/Attendee";
@@ -25,10 +25,15 @@ class DrinkService {
   }
 
   async create(sessionId, rawData) {
+    console.log("Look Service", rawData);
     let data = await _repository.create(rawData);
+    console.log("Look at this", rawData);
+
     let attendeeDrinks = await _repository.find({
       attendeeId: data.attendeeId
     });
+    console.log("ATTENDEE DRINKS", attendeeDrinks);
+
     let drinkCount = 0;
     for (let count = 0; count < attendeeDrinks.length; count++) {
       drinkCount = count;
