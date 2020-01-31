@@ -34,6 +34,7 @@ export default {
 
           if (this.$route.path == "/create") {
             this.$store.dispatch("getBarsFromGoogle", {
+              //TODO make this async somehow
               lat: position.coords.latitude,
               lng: position.coords.longitude
             });
@@ -45,22 +46,34 @@ export default {
         }
       );
     },
-    addMarkers(position) {
+    async addMarkers(position) {
       let results;
       if (this.$route.path == "/create") {
         results = this.$store.state.searchResults;
       } else {
+        await this.$store.dispatch("getActiveOuting", this.$route.params.id);
         results = this.$store.state.activeOuting.barsList;
       }
-      console.log(results);
+      console.log("This is your", this.$store.state.searchResults);
+      let sumLat = 0;
+      let sumLng = 0;
+      for (let index = 0; index < results.length; index++) {
+        const bar = results[index];
+        sumLat += bar.geometry.location.lat;
+        console.log(sumLat);
+        sumLng += bar.geometry.location.lng;
+      }
+      let avLat = sumLat / results.length;
+      let avLng = sumLng / results.length;
+      console.log("Averages", avLat, avLng);
 
       console.log("position", position);
       let googleMap = new google.maps.Map(
         document.getElementById("googleMap"),
         {
           center: {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
+            lat: avLat || position.coords.latitude,
+            lng: avLng || position.coords.longitude
           },
           zoom: 14
         }

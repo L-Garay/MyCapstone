@@ -170,7 +170,7 @@ export default new Vuex.Store({
       dispatch("getAllOutings");
     },
     async getBarsFromGoogle({ commit, dispatch }, coords) {
-      console.log(coords);
+      console.log("Getting bars from Google", coords);
 
       let res = await api.get(`barSearch?lat=${coords.lat}&lng=${coords.lng}`);
       let searchResults = res.data.results;

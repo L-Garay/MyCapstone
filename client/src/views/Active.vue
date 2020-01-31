@@ -36,6 +36,11 @@
         </ul>
       </div>
     </div>
+    <div class="row">
+      <div class="col-4">
+        <h1 id="drink-counter">5</h1>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -70,6 +75,9 @@ export default {
     },
     outingAttendees() {
       return this.$store.state.outingAttendees;
+    },
+    activeAttendee() {
+      return this.$store.state.ActiveAttendee;
     }
   }
 };
@@ -84,5 +92,13 @@ export default {
   margin-top: 5vh;
   height: 10em;
   border-radius: 50%;
+}
+#drink-counter {
+  vertical-align: middle;
+  margin-top: 5vh;
+  height: 3em;
+  width: 3em;
+  border-radius: 50%;
+  background-color: cornflowerblue;
 }
 </style>
