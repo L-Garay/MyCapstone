@@ -30,7 +30,7 @@ export default new Vuex.Store({
     drinks: [],
     comments: [],
     photos: [],
-    outingAttendees: {}
+    outingAttendees: []
   },
   mutations: {
     setUser(state, user) {
@@ -64,6 +64,9 @@ export default new Vuex.Store({
     setActiveOuting(state, activeOuting) {
       state.activeOuting = activeOuting;
     }
+    // addDrink(state, drink) {
+    //   state.drinks.push(drink);
+    // }
   },
   actions: {
     //#region -- AUTH STUFF --
@@ -200,6 +203,12 @@ export default new Vuex.Store({
     async getActiveOuting({ commit, dispatch }, outingId) {
       let res = await api.get("outing/" + outingId);
       commit("setActiveOuting", res.data);
+    },
+    //#endregion
+    //#region -- Drink STUFF --
+    async addDrink({ commit, dispatch }, drink) {
+      await api.post("drinks", drink);
+      // commit("addDrink", res.data);
     }
     //#endregion
   },

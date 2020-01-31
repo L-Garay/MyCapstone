@@ -36,9 +36,29 @@
         </ul>
       </div>
     </div>
-    <div class="row">
+    <div class="row mb-3">
       <div class="col-4">
-        <h1 id="drink-counter">5</h1>
+        <img
+          @click="showForm"
+          class="drinkCounterImg"
+          src="../assets/3drinks.jpg"
+          alt="should be three drinks"
+        />
+      </div>
+      <div>
+        <modal name="drinkModal">
+          <form class="form" @submit.prevent="getLocation">
+            <div class="form-group">
+              <input
+                type="text"
+                name="Name"
+                v-model="newDrink.Description"
+                placeholder="Name of drink (optional) and description"
+              />
+            </div>
+            <button @click="hideForm" class="btn formBtn" type="submit">Add Drink</button>
+          </form>
+        </modal>
       </div>
     </div>
   </div>
@@ -49,7 +69,16 @@ import Navbar from "@/components/NavBar.vue";
 import GoogleMap from "@/components/GoogleMap.vue";
 export default {
   data() {
-    return {};
+    return {
+      location: {},
+      newDrink: {
+        Description: "",
+        Location: {},
+        ActiveOutingId: "",
+        AttendeeId: "",
+        UserId: ""
+      }
+    };
   },
   mounted() {
     this.$store.dispatch("getActiveOuting", this.$route.params.id);
@@ -67,6 +96,48 @@ export default {
       } catch (error) {
         next(error);
       }
+    },
+    showForm() {
+      this.$modal.show("drinkModal");
+    },
+    hideForm() {
+      this.$modal.hide("drinkModal");
+    },
+    async getLocation() {
+      await navigator.geolocation.getCurrentPosition(
+        async position => {
+          this.location = await position;
+          console.log("Here's your position", this.location);
+          this.addDrink();
+        },
+        e => {
+          console.error(e);
+        }
+      );
+    },
+    async addDrink() {
+      console.log("Check it", this.location);
+      let drink = {
+        description: this._data.newDrink.Description || "",
+        location: this.location,
+        outing: this.$store.state.activeOuting.id,
+        attendeeId: this.$store.state.outingAttendees[0].id,
+        userId: this.$store.state.outingAttendees[0].userId
+      };
+      console.log("THIS SHOULD BE THE DRINK LOCATION", drink.location);
+
+      console.log(this.$store.state.user);
+
+      console.log("THIS IS THE DRINK", drink);
+
+      this.$store.dispatch("addDrink", drink);
+      let newDrink = {
+        Description: "",
+        Location: "",
+        outing: "",
+        attendeeId: "",
+        userId: ""
+      };
     }
   },
   computed: {
@@ -100,5 +171,9 @@ export default {
   width: 3em;
   border-radius: 50%;
   background-color: cornflowerblue;
+}
+.drinkCounterImg {
+  border-radius: 50%;
+  box-shadow: 3px 3px 5px black;
 }
 </style>
