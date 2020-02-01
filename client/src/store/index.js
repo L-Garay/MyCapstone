@@ -226,9 +226,12 @@ export default new Vuex.Store({
       commit("setActiveOutingDrinks", res.data);
       return res.data;
     },
-    async getActiveAttendee({ commit, dispatch }, userId) {
+    async getActiveAttendee({ commit, dispatch }) {
       let res = await api.get(
-        "outing/" + this.state.activeOuting._id + "/user/" + userId
+        "outing/" +
+          this.state.activeOuting._id +
+          "/user/" +
+          this.state.outingAttendees[0].userId
       );
       console.log("ActiveAttendee", res.data);
 

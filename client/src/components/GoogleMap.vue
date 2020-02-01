@@ -59,7 +59,7 @@ export default {
       } else {
         await this.$store.dispatch("getActiveOuting", this.$route.params.id);
         results = this.$store.state.activeOuting.barsList;
-        await this.$store.dispatch("getActiveAttendee", this.$route.params.id);
+        await this.$store.dispatch("getActiveAttendee");
 
         drinks = await this.$store.dispatch(
           "getActiveAttendeeDrinks",

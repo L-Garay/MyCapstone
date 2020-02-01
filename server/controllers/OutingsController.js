@@ -13,7 +13,7 @@ export default class OutingController {
       .use(Authorize.authenticated)
       .get("", this.getAllOutings)
       .get("/:id", this.getById)
-      .get("/:id/user/:id", this.getActiveAttendee)
+      .get("/:id/user/:uId", this.getActiveAttendee)
       .get("/:id/drinks", this.getOutingDrinks)
       .get("/:id/attendees", this.getOutingAttendees)
       .post("", this.create)
@@ -39,7 +39,7 @@ export default class OutingController {
     try {
       let data = await _attendeeService.getByOutingAndUser(
         req.params.id,
-        req.session.uid
+        req.params.uId
       );
       return res.send(data);
     } catch (error) {
