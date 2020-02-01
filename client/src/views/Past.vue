@@ -51,9 +51,9 @@
                 alt="..."
               />
             </div>
-            <div class="carousel-item">
+            <div v-for="(photo, index) in outing.photos" :key="index" class="carousel-item">
               <img
-                src="../assets/bar3.jpg"
+                :src="photo"
                 class="d-block w-100 carouselImgs"
                 alt="..."
               />
