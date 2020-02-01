@@ -2,6 +2,11 @@
   <div class="map">
     <button class="btn-info" @click.prevent="findLocation">Search</button>
     <div id="googleMap" style="width: 70vw; height: 300px"></div>
+    <div>
+      Icons made by
+      <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from
+      <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+    </div>
   </div>
 </template>
 <script>
@@ -48,16 +53,20 @@ export default {
     },
     async addMarkers(position) {
       let results;
+      let drinks;
       if (this.$route.path == "/create") {
         results = this.$store.state.searchResults;
       } else {
         await this.$store.dispatch("getActiveOuting", this.$route.params.id);
         results = this.$store.state.activeOuting.barsList;
-        await this.$store.dispatch("getActiveDrinks", this.$route.params.id);
-        drinks = this.$store.state.activeDrinks;
+        drinks = await this.$store.dispatch(
+          "getActiveAttendeeDrinks",
+          "5e28c71a9419ce2288648101"
+        ); //TODO Add attendeeId dynamically
       }
       console.log("This is your", this.$store.state.searchResults);
-      console.log("Active Drinks are:", this.drinks);
+      //drinks = this.$store.state.activeAttendeeDrinks;
+      console.log("Active Drinks are:", drinks);
       let sumLat = 0;
       let sumLng = 0;
       for (let index = 0; index < results.length; index++) {
@@ -129,14 +138,16 @@ export default {
           let infowindow = new google.maps.InfoWindow({
             content: contentString
           });
-          console.log("Drink markers to be drawn:", drink.name);
-
+          console.log("Drink markers to be drawn:", drink.description);
+          console.log("drink longitude", drink.location.longitude);
+          var iconBase = "https://maps.google.com/mapfiles/kml/shapes/";
           let marker = new google.maps.Marker({
             position: {
-              lat: drink.location.geometry.location.lat,
-              lng: drink.location.geometry.location.lng
+              lat: drink.location.latitude,
+              lng: drink.location.longitude
             },
-            map: googleMap
+            map: googleMap,
+            icon: require("../assets/beer 32px.png")
           });
 
           marker.addListener("click", function() {

@@ -8,7 +8,7 @@ const Attendee = new Schema(
     outingId: { type: ObjectId, required: true },
     name: { type: String },
     drinks: { type: Array },
-    status: { type: Number, default: 0 },
+    status: { type: Number },
     goneHome: { type: Boolean, default: false },
     location: { type: Object }
   },

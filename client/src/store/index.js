@@ -30,7 +30,8 @@ export default new Vuex.Store({
     drinks: [],
     comments: [],
     photos: [],
-    outingAttendees: []
+    outingAttendees: [],
+    activeAttendeeDrinks: []
   },
   mutations: {
     setUser(state, user) {
@@ -63,10 +64,14 @@ export default new Vuex.Store({
     },
     setActiveOuting(state, activeOuting) {
       state.activeOuting = activeOuting;
+    },
+    setActiveOutingDrinks(state, activeOutingDrinks) {
+      state.activeAttendeeDrinks = activeOutingDrinks;
+      console.log(
+        "Your drinks made it to the store",
+        state.activeAttendeeDrinks
+      );
     }
-    // addDrink(state, drink) {
-    //   state.drinks.push(drink);
-    // }
   },
   actions: {
     //#region -- AUTH STUFF --
@@ -207,8 +212,15 @@ export default new Vuex.Store({
     //#endregion
     //#region -- Drink STUFF --
     async addDrink({ commit, dispatch }, drink) {
-      await api.post("drinks", drink);
-      // commit("addDrink", res.data);
+      let res = await api.post("drinks", drink);
+      console.log("Updated Attendee", res.data);
+      dispatch("getOutingAttendees", res.data.outingId);
+    },
+    async getActiveAttendeeDrinks({ commit, dispatch }, activeAttendeeId) {
+      let res = await api.get("attendee/" + activeAttendeeId + "/drinks");
+      console.log("These are your active Drinks", res.data);
+      commit("setActiveOutingDrinks", res.data);
+      return res.data;
     }
     //#endregion
   },

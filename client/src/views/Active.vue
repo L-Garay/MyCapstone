@@ -106,8 +106,7 @@ export default {
     async getLocation() {
       await navigator.geolocation.getCurrentPosition(
         async position => {
-          this.location = await position;
-          console.log("Here's your position", this.location);
+          this.location = await position.coords;
           this.addDrink();
         },
         e => {
@@ -116,28 +115,24 @@ export default {
       );
     },
     async addDrink() {
-      console.log("Check it", this.location);
       let drink = {
         description: this._data.newDrink.Description || "",
-        location: this.location,
+        location: {
+          latitude: this.location.latitude,
+          longitude: this.location.longitude
+        },
         outing: this.$store.state.activeOuting.id,
         attendeeId: this.$store.state.outingAttendees[0].id,
         userId: this.$store.state.outingAttendees[0].userId
       };
-      console.log("THIS SHOULD BE THE DRINK LOCATION", drink.location);
-
-      console.log(this.$store.state.user);
-
-      console.log("THIS IS THE DRINK", drink);
-
       this.$store.dispatch("addDrink", drink);
-      let newDrink = {
-        Description: "",
-        Location: "",
-        outing: "",
-        attendeeId: "",
-        userId: ""
-      };
+      // let newDrink = {
+      //   Description: "",
+      //   Location: "",
+      //   outing: "",
+      //   attendeeId: "",
+      //   userId: ""
+      // };
     }
   },
   computed: {

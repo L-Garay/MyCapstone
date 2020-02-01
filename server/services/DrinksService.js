@@ -34,14 +34,15 @@ class DrinkService {
     });
     console.log("ATTENDEE DRINKS", attendeeDrinks);
 
-    let drinkCount = 0;
-    for (let count = 0; count < attendeeDrinks.length; count++) {
-      drinkCount = count;
-    }
-    let attendee = await _attendeeRepository.find({
+    let drinkCount = attendeeDrinks.length;
+    console.log(drinkCount);
+
+    let attendee = await _attendeeRepository.findOne({
       _id: data.attendeeId
     });
     attendee.status = drinkCount;
+    console.log("This is your attendee", attendee);
+
     let updatedAttendee = await _attendeeService.edit(
       attendee._id,
       sessionId,
