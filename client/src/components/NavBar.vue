@@ -9,6 +9,7 @@
       >
         <img id="logoButton" src="../assets/BarHopLogo.png" alt />
       </button>
+
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <li>
           <a class="dropdown-item" href="#">
@@ -31,7 +32,7 @@
       <button
         class="btn btn-secondary dropdown-toggle"
         type="button"
-        id="dropdownMenuButton2"
+        id="dropdownMenuButton"
         data-toggle="dropdown"
       >
         <img id="logoButton" src="../assets/BarHopLogo.png" alt />
@@ -60,14 +61,14 @@ export default {
         enableHighAccuracy: true,
         maximumAge: 3000,
         timeout: 5000
-      },
       }
-      // wpid: navigator.geolocation.watchPosition(
-      //   this.geo_success,
-      //   this.geo_error,
-      //   this.geo_options
-      // )
-    },
+    };
+    // wpid: navigator.geolocation.watchPosition(
+    //   this.geo_success,
+    //   this.geo_error,
+    //   this.geo_options
+    // )
+  },
   mounted() {
     // this.$store.dispatch("getActiveOuting", this.$route.params.id);
     // this.$store.dispatch("getActiveAttendee");
@@ -95,8 +96,25 @@ export default {
 };
 </script>
 
-<style>
+<style >
 #logoButton {
-  height: 3em;
+  height: 7em;
+  width: 7em;
+  border-radius: 50%;
+  background-color: white !important;
+  border: solid !important;
+  border-color: black !important;
+}
+.button.btn img {
+  padding: 2px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  /* background-color: white !important; */
+}
+#dropdownMenuButton {
+  background-color: white;
+  border: none;
 }
 </style>
