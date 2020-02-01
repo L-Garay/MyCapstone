@@ -31,7 +31,8 @@ export default new Vuex.Store({
     comments: [],
     photos: [],
     outingAttendees: [],
-    activeAttendeeDrinks: []
+    activeAttendeeDrinks: [],
+    activeAttendee: {}
   },
   mutations: {
     setUser(state, user) {
@@ -71,6 +72,9 @@ export default new Vuex.Store({
         "Your drinks made it to the store",
         state.activeAttendeeDrinks
       );
+    },
+    setActiveAttendee(state, Attendee) {
+      state.activeAttendee = Attendee;
     }
   },
   actions: {
@@ -220,6 +224,15 @@ export default new Vuex.Store({
       let res = await api.get("attendee/" + activeAttendeeId + "/drinks");
       console.log("These are your active Drinks", res.data);
       commit("setActiveOutingDrinks", res.data);
+      return res.data;
+    },
+    async getActiveAttendee({ commit, dispatch }, userId) {
+      let res = await api.get(
+        "outing/" + this.state.activeOuting._id + "/user/" + userId
+      );
+      console.log("ActiveAttendee", res.data);
+
+      commit("setActiveAttendee", res.data);
       return res.data;
     }
     //#endregion

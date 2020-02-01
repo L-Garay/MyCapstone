@@ -59,12 +59,17 @@ export default {
       } else {
         await this.$store.dispatch("getActiveOuting", this.$route.params.id);
         results = this.$store.state.activeOuting.barsList;
+        await this.$store.dispatch("getActiveAttendee", this.$route.params.id);
+
         drinks = await this.$store.dispatch(
           "getActiveAttendeeDrinks",
-          "5e28c71a9419ce2288648101"
+          this.$store.state.activeAttendee._id
         ); //TODO Add attendeeId dynamically
       }
-      console.log("This is your", this.$store.state.searchResults);
+      console.log(
+        "This is your ActiveAttendee",
+        this.$store.state.activeAttendee._id
+      );
       //drinks = this.$store.state.activeAttendeeDrinks;
       console.log("Active Drinks are:", drinks);
       let sumLat = 0;
@@ -138,9 +143,6 @@ export default {
           let infowindow = new google.maps.InfoWindow({
             content: contentString
           });
-          console.log("Drink markers to be drawn:", drink.description);
-          console.log("drink longitude", drink.location.longitude);
-          var iconBase = "https://maps.google.com/mapfiles/kml/shapes/";
           let marker = new google.maps.Marker({
             position: {
               lat: drink.location.latitude,
