@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.6b73a4efb66740e9e11b50cf4991c516.js"
+  "/precache-manifest.865c66c26c01894c02b1aa5915db2b49.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "barhop"});
